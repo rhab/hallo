@@ -5,3 +5,4 @@ docs_tmp/
 _site/
 
 .DS_Store
+*.bak

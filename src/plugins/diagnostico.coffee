@@ -76,7 +76,7 @@
 
         widget.options.editable.restoreSelection(widget.lastSelection)
         codCapsula = (jQuery "#filterDia option:selected").val()
-        codPeriodo = (jQuery "#filterPerDia option:selected").text()
+        codPeriodo = (jQuery "#filterPerDia option:selected").val()
         
         #widget.lastSelection.collapse(true);
         if existe
@@ -84,6 +84,7 @@
             nodoLink = widget.lastSelection.startContainer.parentNode
             jQuery(nodoLink).attr('data-cap', codCapsula)
             jQuery(nodoLink).attr('data-per', codPeriodo)
+            jQuery(nodoLink).attr('class', "diaResaltadoEditor resaltadoEditor")
             jQuery(nodoLink).attr('title', "Diagn\u00F3stico #{codCapsula} ## Periodo #{codPeriodo}")
             jQuery(nodoLink).attr('data-dsl', "dia(\'#{codCapsula}\',\'#{codPeriodo}\')")
         else

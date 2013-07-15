@@ -1,7 +1,7 @@
-#     AKELAB Capsula
+#     AKELAB Condicion
 #     2013
 ((jQuery) ->
-  jQuery.widget "IKS.capsula",
+  jQuery.widget "IKS.condicion",
     options:
       editable: null
       uuid: ""
@@ -10,15 +10,15 @@
       defaultUrl: 'http://'
       dialogOpts:
         autoOpen: false
-        width: 540
+        width: 590
         height: 200
-        title: "Ingresar C\u00E1psula"
+        title: "Ingresar Condici\u00F3n"
         buttonTitle: "Aceptar"
         buttonUpdateTitle: "Aceptar"
         modal: true
         resizable: false
         draggable: true
-        dialogClass: 'capsula-dialog'
+        dialogClass: 'condicion-dialog'
       buttonCssClass: null 
 
     populateToolbar: (toolbar) ->
@@ -35,20 +35,28 @@
           <input class=\"url\" style=\"display:none\" type=\"text\" name=\"url\"
             value=\"#{@options.defaultUrl}\" />
             
-          <select id=\"filterCap\" class=\"filterChooser\" title=\"C&aacute;psulas\">
+          <select id=\"filterCapCon1\" class=\"filterChooser\" title=\"C&aacute;psulas\">
               <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una C&aacute;psula --</option>
           </select>
           
-          <select id=\"filterPer\" class=\"filterChooser\" title=\"Periodos\">
-              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione el periodo --</option>
-              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
-							<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
-							<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
-							<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
-							<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
-							<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
-							<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
+          <select id=\"filterOpe\" class=\"filterChooser\" title=\"Operaci\u00F3n\">
+              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Operaci\u00F3n --</option>
+              <option value=\"+\" data-filter-type=\"\" >+</option>
+              <option value=\"-\" data-filter-type=\"\" >-</option>
+              <option value=\"*\" data-filter-type=\"\" >*</option>
+              <option value=\"/\" data-filter-type=\"\" >/</option>
           </select>
+          
+          <select id=\"filterCapCon2\" class=\"filterChooser\" title=\"C&aacute;psulas\">
+              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una C&aacute;psula --</option>
+          </select>
+          
+          <input class=\"url\" type=\"text\" id=\"tval\"
+            value=\"\" />
+            
+          <input class=\"url\" type=\"text\" id=\"fval\"
+            value=\"\" />
+          
           <input type=\"submit\" id=\"dellinkButton\" value=\"Borrar\"/>
           <input type=\"submit\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
         </form></div>"
@@ -75,8 +83,8 @@
         dialog.dialog('close')
 
         widget.options.editable.restoreSelection(widget.lastSelection)
-        codCapsula = (jQuery "#filterCap option:selected").val()
-        codPeriodo = (jQuery "#filterPer option:selected").val()
+        codCapsula = (jQuery "#filterDia option:selected").val()
+        codPeriodo = (jQuery "#filterPerDia option:selected").val()
         
         #widget.lastSelection.collapse(true);
         if existe
@@ -84,14 +92,14 @@
             nodoLink = widget.lastSelection.startContainer.parentNode
             jQuery(nodoLink).attr('data-cap', codCapsula)
             jQuery(nodoLink).attr('data-per', codPeriodo)
-            jQuery(nodoLink).attr('class', "capResaltadoEditor resaltadoEditor")
-            jQuery(nodoLink).attr('title', "C\u00E1psula #{codCapsula} ## Periodo #{codPeriodo}")
-            jQuery(nodoLink).attr('data-dsl', "cap(\'#{codCapsula}\',\'#{codPeriodo}\')")
+            jQuery(nodoLink).attr('class', "diaResaltadoEditor resaltadoEditor")
+            jQuery(nodoLink).attr('title', "Diagn\u00F3stico #{codCapsula} ## Periodo #{codPeriodo}")
+            jQuery(nodoLink).attr('data-dsl', "dia(\'#{codCapsula}\',\'#{codPeriodo}\')")
         else
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue
-            linkNode = jQuery("<a class=\"capResaltadoEditor resaltadoEditor\" 
-            title=\"C&aacute;psula #{codCapsula} ## Periodo #{codPeriodo}\" 
-            data-dsl=\"cap('#{codCapsula}','#{codPeriodo}')\" 
+            linkNode = jQuery("<a class=\"diaResaltadoEditor resaltadoEditor\" 
+            title=\"Diagn\u00F3stico #{codCapsula} ## Periodo #{codPeriodo}\" 
+            data-dsl=\"dia('#{codCapsula}','#{codPeriodo}')\" 
             data-cap=\"#{codCapsula}\" 
             data-per=\"#{codPeriodo}\" 
             href='#{link}'>#{texto}</a>")[0];
@@ -108,8 +116,8 @@
         id = "#{@options.uuid}-#{type}"
         buttonHolder = jQuery '<span></span>'
         buttonHolder.hallobutton
-          label: 'C&aacute;psula'
-          icon: 'icon-cogs'
+          label: 'Condici\u00F3n'
+          icon: 'icon-plus-sign'
           editable: @options.editable
           command: null
           queryState: false
@@ -120,21 +128,21 @@
         button.on "click", (event) ->
           # we need to save the current selection because we will lose focus
           if not cargadosCombos
-              jQuery('.capsel').find('option').clone().appendTo('#filterCap');
+              #jQuery('.diasel').find('option').clone().appendTo('#filterDia');
               cargadosCombos = true
           widget.lastSelection = widget.options.editable.getSelection()
           urlInput = jQuery 'input[name=url]', dialog
           selectionParent = widget.lastSelection.startContainer.parentNode
           unless selectionParent.href
             urlInput.val(widget.options.defaultUrl)
-            jQuery("#filterCap").val ""
-            jQuery("#filterPer").val ""
+            #jQuery("#filterDia").val ""
+            #jQuery("#filterPerDia").val ""
             existe = false
           else
             urlInput.val(jQuery(selectionParent).attr('href'))
-            jQuery("#filterCap").val jQuery(selectionParent).attr('data-cap')
-            jQuery("#filterPer").val jQuery(selectionParent).attr('data-per')
-            texto = jQuery(selectionParent).text()
+            #jQuery("#filterDia").val jQuery(selectionParent).attr('data-cap')
+            #jQuery("#filterPerDia").val jQuery(selectionParent).attr('data-per')
+            #texto = jQuery(selectionParent).text()
             existe = true
 
           widget.options.editable.keepActivated true
