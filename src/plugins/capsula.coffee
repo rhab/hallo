@@ -35,11 +35,11 @@
           <input class=\"url\" style=\"display:none\" type=\"text\" name=\"url\"
             value=\"#{@options.defaultUrl}\" />
             
-          <select id=\"filterCap\" class=\"filterChooser\" title=\"C&aacute;psulas\">
+          <select id=\"filterCap\" class=\"filterChooser\" style=\"width:45%;\" title=\"C&aacute;psulas\">
               <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una C&aacute;psula --</option>
           </select>
           
-          <select id=\"filterPer\" class=\"filterChooser\" title=\"Periodos\">
+          <select id=\"filterPer\" class=\"filterChooser\" style=\"width:15%;\" title=\"Periodos\">
               <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione el periodo --</option>
               <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
 							<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
@@ -48,7 +48,7 @@
 							<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
 							<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
 							<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
-          </select>
+          </select><br />
           <input type=\"submit\" id=\"dellinkButton\" value=\"Borrar\"/>
           <input type=\"submit\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
         </form></div>"

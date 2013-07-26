@@ -10,8 +10,8 @@
       defaultUrl: 'http://'
       dialogOpts:
         autoOpen: false
-        width: 590
-        height: 250
+        width: 660
+        height: 270
         title: "Ingresar Condici\u00F3n"
         buttonTitle: "Aceptar"
         buttonUpdateTitle: "Aceptar"
@@ -35,11 +35,11 @@
           <input class=\"url\" style=\"display:none\" type=\"text\" name=\"url\"
             value=\"#{@options.defaultUrl}\" />
             
-          <select id=\"filterCapCon1\" class=\"filterChooser\" title=\"C&aacute;psulas\">
+          <select id=\"filterCapCon1\" class=\"filterChooser\" style=\"width:33%;\" title=\"C&aacute;psulas\">
               <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una C&aacute;psula --</option>
           </select>
           
-          <select id=\"filterPerCon1\" class=\"filterChooser\" title=\"Periodos\">
+          <select id=\"filterPerCon1\" class=\"filterChooser\" style=\"width:12%;\"  title=\"Periodos\">
               <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>
               <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
 							<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
@@ -50,7 +50,7 @@
 							<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
           </select>
           
-          <select id=\"filterOpe\" class=\"filterChooser\" title=\"Operaci\u00F3n\">
+          <select id=\"filterOpe\" class=\"filterChooser\" style=\"width:7%;\" title=\"Operaci\u00F3n\">
               <option value=\"\" data-filter-type=\"\" selected=\"selected\">Op.</option>
               <option value=\"+\" data-filter-type=\"\" >&nbsp;+</option>
               <option value=\"-\" data-filter-type=\"\" >&nbsp;-</option>
@@ -58,11 +58,11 @@
               <option value=\"/\" data-filter-type=\"\" >&nbsp;/</option>
           </select>
           
-          <select id=\"filterCapCon2\" class=\"filterChooser\" title=\"C&aacute;psulas\">
+          <select id=\"filterCapCon2\" class=\"filterChooser\" style=\"width:33%;\" title=\"C&aacute;psulas\">
               <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una C&aacute;psula --</option>
           </select>
           
-          <select id=\"filterPerCon2\" class=\"filterChooser\" title=\"Periodos\">
+          <select id=\"filterPerCon2\" class=\"filterChooser\" style=\"width:12%;\"  title=\"Periodos\">
               <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>
               <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
 							<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
@@ -73,7 +73,7 @@
 							<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
           </select>
           
-          <br/><select id=\"filterComp\" class=\"filterChooser\" title=\"Comparaci\u00F3n\">
+          <br/><select id=\"filterComp\" class=\"filterChooser\" style=\"width:25%;\"  title=\"Comparaci\u00F3n\">
               <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Comparaci\u00F3n\ --</option>
               <option value=\"=\" data-filter-type=\"\" >=</option>
               <option value=\"<=\" data-filter-type=\"\" ><=</option>
@@ -82,15 +82,15 @@
               <option value=\">\" data-filter-type=\"\" >></option>
           </select>
           
-          <input class=\"inputNumericDialogEditor\" type=\"text\" id=\"valcomparar\" style=\"margin: 5px;\" value=\"\" />
+          <input class=\"inputNumericDialogEditor\" type=\"text\" id=\"valcomparar\" style=\"margin:5px;width:25%;\" value=\"\" />
           <TABLE>
           	<TR>
 	    				<TD style=\"padding: 2px;\">Verdadero:</TD>
-	    				<TD style=\"padding: 2px;\"><input class=\"inputDialogEditor\" type=\"text\" id=\"tval\" value=\"\" /></TD>
+	    				<TD style=\"padding: 2px;\"><input class=\"inputDialogEditor\" type=\"text\" id=\"tval\" style=\"width:25%;\" value=\"\" /></TD>
           	</TR>
           	<TR>
 	    				<TD style=\"padding: 2px;\">Falso:</TD>
-	    				<TD style=\"padding: 2px;\"><input class=\"inputDialogEditor\" type=\"text\" id=\"fval\" value=\"\" /></TD>
+	    				<TD style=\"padding: 2px;\"><input class=\"inputDialogEditor\" type=\"text\" id=\"fval\" style=\"width:25%;\" value=\"\" /></TD>
           	</TR>
           </TABLE>
           
@@ -222,7 +222,7 @@
             existe = true
 
           widget.options.editable.keepActivated true
-          dialog.dialog('open').dialog({ position: { my: "top", at: "top", of: dialog } })
+          dialog.dialog('open').dialog({ position: { my: "top", at: "top", of: window } })
 
           dialog.on 'dialogclose', ->
             widget.options.editable.restoreSelection widget.lastSelection

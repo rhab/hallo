@@ -44,7 +44,7 @@
 							<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
 							<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
 							<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
-          </select>
+          </select><br />
           <input type=\"submit\" id=\"dellinkButton\" value=\"Borrar\"/>
           <input type=\"submit\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
         </form></div>"
