@@ -40,7 +40,7 @@
           </select>
           
           <select id=\"filterPerDia\" class=\"filterChooser\" style=\"width:20%;\" title=\"Periodos\">
-              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione el periodo --</option>
+              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Periodo</option>
               <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
 							<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
 							<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>

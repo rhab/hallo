@@ -40,7 +40,7 @@
           </select>
           
           <select id=\"filterPer\" class=\"filterChooser\" style=\"width:15%;\" title=\"Periodos\">
-              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione el periodo --</option>
+              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Periodo</option>
               <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
 							<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
 							<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
@@ -86,12 +86,12 @@
             jQuery(nodoLink).attr('data-per', codPeriodo)
             jQuery(nodoLink).attr('class', "capResaltadoEditor resaltadoEditor")
             jQuery(nodoLink).attr('title', "C\u00E1psula #{codCapsula} ## Periodo #{codPeriodo}")
-            jQuery(nodoLink).attr('data-dsl', "cap(\'#{codCapsula}\',\'#{codPeriodo}\')")
+            jQuery(nodoLink).attr('data-dsl', "capf(\'#{codCapsula}\',\'#{codPeriodo}\')")
         else
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue
             linkNode = jQuery("<a class=\"capResaltadoEditor resaltadoEditor\" 
             title=\"C&aacute;psula #{codCapsula} ## Periodo #{codPeriodo}\" 
-            data-dsl=\"cap('#{codCapsula}','#{codPeriodo}')\" 
+            data-dsl=\"capf('#{codCapsula}','#{codPeriodo}')\" 
             data-cap=\"#{codCapsula}\" 
             data-per=\"#{codPeriodo}\" 
             href='#{link}'>#{texto}</a>")[0];

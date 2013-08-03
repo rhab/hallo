@@ -76,6 +76,7 @@
           <br/><select id=\"filterComp\" class=\"filterChooser\" style=\"width:25%;\"  title=\"Comparaci\u00F3n\">
               <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Comparaci\u00F3n\ --</option>
               <option value=\"=\" data-filter-type=\"\" >=</option>
+              <option value=\"<>\" data-filter-type=\"\" ><></option>
               <option value=\"<=\" data-filter-type=\"\" ><=</option>
               <option value=\">=\" data-filter-type=\"\" >>=</option>
               <option value=\"<\" data-filter-type=\"\" ><</option>
