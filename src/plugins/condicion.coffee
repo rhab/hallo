@@ -34,56 +34,156 @@
         <form action=\"#\" method=\"post\" class=\"linkForm\">
           <input class=\"url\" style=\"display:none\" type=\"text\" name=\"url\"
             value=\"#{@options.defaultUrl}\" />
-            
-          <select id=\"filterCapCon1\" class=\"filterChooser\" style=\"width:33%;\" title=\"C&aacute;psulas\">
-              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una C&aacute;psula --</option>
-          </select>
+          <TABLE>
+          	<TR>
+	    				<TD style=\"padding: 2px;width:45%;\">
+			          <fieldset style=\"border:2px solid red;\">
+			          <legend>Operando 1</legend>
+			          <input type='radio' name='op1' style='margin: 10px;' value='capsula'>C&aacute;psula</input>
+  							<input type='radio' name='op1' style='margin: 10px;' value='constante'>Constante</input>
+			          </br>
+			          <select id=\"filterCapCon1\" class=\"caps1\" style=\"width:70%;\" title=\"C&aacute;psulas\">
+			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione C&aacute;psula --</option>
+			          </select>
+			          
+			          <select id=\"filterPerCon1\" class=\"caps1\" style=\"width:20%;\"  title=\"Periodos\">
+			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>
+			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
+										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
+										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
+										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
+										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
+										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
+										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
+			          </select>
+			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante1\" style=\"width:80%;\" value=\"\" />
+			          </fieldset>
+          		</TD>
+          		<TD style=\"padding: 2px;width:10%;\">
+			          <fieldset style=\"border:2px solid black;\">
+			          <legend>Operaci\u00F3n</legend>
+				          <select id=\"filterOpe\" class=\"filterChooser\" style=\"width:100%;\" title=\"Operaci\u00F3n\">
+				              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Op.</option>
+				              <option value=\"+\" data-filter-type=\"\" >&nbsp;+</option>
+				              <option value=\"-\" data-filter-type=\"\" >&nbsp;-</option>
+				              <option value=\"*\" data-filter-type=\"\" >&nbsp;*</option>
+				              <option value=\"/\" data-filter-type=\"\" >&nbsp;/</option>
+				          </select>
+				        </fieldset>
+			        </TD>
+          		<TD style=\"padding: 2px;width:45%;\">
+			          <fieldset style=\"border:2px solid blue;\">
+			          <legend>Operando 2</legend>
+			          <input type='radio' name='op2' style='margin: 10px;' value='capsula'>C&aacute;psula</input>
+  							<input type='radio' name='op2' style='margin: 10px;' value='constante'>Constante</input>
+			          </br>
+			          <select id=\"filterCapCon2\" class=\"caps2\" style=\"width:70%;\" title=\"C&aacute;psulas\">
+			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione C&aacute;psula --</option>
+			          </select>
+			          
+			          <select id=\"filterPerCon2\" class=\"caps2\" style=\"width:20%;\"  title=\"Periodos\">
+			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>
+			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
+										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
+										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
+										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
+										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
+										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
+										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
+			          </select>
+			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante2\" style=\"margin:0px;width:80%;\" value=\"\" />
+			          </fieldset>
+			        </TD>
+            </TR>
+          </TABLE>
           
-          <select id=\"filterPerCon1\" class=\"filterChooser\" style=\"width:12%;\"  title=\"Periodos\">
-              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>
-              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
-							<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
-							<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
-							<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
-							<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
-							<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
-							<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
-          </select>
           
-          <select id=\"filterOpe\" class=\"filterChooser\" style=\"width:7%;\" title=\"Operaci\u00F3n\">
-              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Op.</option>
-              <option value=\"+\" data-filter-type=\"\" >&nbsp;+</option>
-              <option value=\"-\" data-filter-type=\"\" >&nbsp;-</option>
-              <option value=\"*\" data-filter-type=\"\" >&nbsp;*</option>
-              <option value=\"/\" data-filter-type=\"\" >&nbsp;/</option>
-          </select>
+          <TABLE>
+          	<TR>
+	    				<TD style=\"padding: 2px;width:45%;\">
+			          <fieldset style=\"border:2px solid black;\">
+						    <legend>Comparaci\u00F3n</legend>
+			          <select id=\"filterComp\" class=\"filterChooser\" style=\"width:25%;\"  title=\"Comparaci\u00F3n\">
+			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Comparaci\u00F3n\ --</option>
+			              <option value=\"=\" data-filter-type=\"\" >=</option>
+			              <option value=\"<>\" data-filter-type=\"\" ><></option>
+			              <option value=\"<=\" data-filter-type=\"\" ><=</option>
+			              <option value=\">=\" data-filter-type=\"\" >>=</option>
+			              <option value=\"<\" data-filter-type=\"\" ><</option>
+			              <option value=\">\" data-filter-type=\"\" >></option>
+			          </select>
+			          </fieldset>
+              </TD>
+            </TR>
+          </TABLE>
+
           
-          <select id=\"filterCapCon2\" class=\"filterChooser\" style=\"width:33%;\" title=\"C&aacute;psulas\">
-              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una C&aacute;psula --</option>
-          </select>
           
-          <select id=\"filterPerCon2\" class=\"filterChooser\" style=\"width:12%;\"  title=\"Periodos\">
-              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>
-              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
-							<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
-							<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
-							<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
-							<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
-							<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
-							<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
-          </select>
+          <TABLE>
+          	<TR>
+	    				<TD style=\"padding: 2px;width:45%;\">
+			          <fieldset style=\"border:2px solid red;\">
+			          <legend>Operando 3</legend>
+			          <input type='radio' name='op3' style='margin: 10px;' value='capsula'>C&aacute;psula</input>
+  							<input type='radio' name='op3' style='margin: 10px;' value='constante'>Constante</input>
+			          </br>
+			          <select id=\"filterCapCon3\" class=\"caps3\" style=\"width:70%;\" title=\"C&aacute;psulas\">
+			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione C&aacute;psula --</option>
+			          </select>
+			          
+			          <select id=\"filterPerCon3\" class=\"caps3\" style=\"width:20%;\"  title=\"Periodos\">
+			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>
+			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
+										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
+										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
+										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
+										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
+										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
+										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
+			          </select>
+			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante3\" style=\"margin:0px;width:80%;\" value=\"\" />
+			          </fieldset>
+          		</TD>
+          		<TD style=\"padding: 2px;width:10%;\">
+			          <fieldset style=\"border:2px solid black;\">
+			          <legend>Operaci\u00F3n</legend>
+				          <select id=\"filterOpe2\" class=\"filterChooser\" style=\"width:100%;\" title=\"Operaci\u00F3n\">
+				              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Op.</option>
+				              <option value=\"+\" data-filter-type=\"\" >&nbsp;+</option>
+				              <option value=\"-\" data-filter-type=\"\" >&nbsp;-</option>
+				              <option value=\"*\" data-filter-type=\"\" >&nbsp;*</option>
+				              <option value=\"/\" data-filter-type=\"\" >&nbsp;/</option>
+				          </select>
+				        </fieldset>
+			        </TD>
+          		<TD style=\"padding: 2px;width:45%;\">
+			          <fieldset style=\"border:2px solid blue;\">
+			          <legend>Operando 4</legend>
+			          <input type='radio' name='op4' style='margin: 10px;' value='capsula'>C&aacute;psula</input>
+  							<input type='radio' name='op4' style='margin: 10px;' value='constante'>Constante</input>
+			          </br>
+			          <select id=\"filterCapCon4\" class=\"caps4\" style=\"width:70%;\" title=\"C&aacute;psulas\">
+			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione C&aacute;psula --</option>
+			          </select>
+			          
+			          <select id=\"filterPerCon4\" class=\"caps4\" style=\"width:20%;\"  title=\"Periodos\">
+			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>
+			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
+										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
+										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
+										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
+										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
+										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
+										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
+			          </select>
+			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante4\" style=\"margin:0px;width:80%;\" value=\"\" />
+			          </fieldset>
+			        </TD>
+            </TR>
+          </TABLE>
           
-          <br/><select id=\"filterComp\" class=\"filterChooser\" style=\"width:25%;\"  title=\"Comparaci\u00F3n\">
-              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Comparaci\u00F3n\ --</option>
-              <option value=\"=\" data-filter-type=\"\" >=</option>
-              <option value=\"<>\" data-filter-type=\"\" ><></option>
-              <option value=\"<=\" data-filter-type=\"\" ><=</option>
-              <option value=\">=\" data-filter-type=\"\" >>=</option>
-              <option value=\"<\" data-filter-type=\"\" ><</option>
-              <option value=\">\" data-filter-type=\"\" >></option>
-          </select>
-          
-          <input class=\"inputNumericDialogEditor\" type=\"text\" id=\"valcomparar\" style=\"margin:5px;width:25%;\" value=\"\" />
+          <fieldset style=\"border:2px solid black;\">
+			          <legend>Resultado</legend>
           <TABLE>
           	<TR>
 	    				<TD style=\"padding: 2px;\">Verdadero:</TD>
@@ -94,9 +194,10 @@
 	    				<TD style=\"padding: 2px;\"><input class=\"inputDialogEditor\" type=\"text\" id=\"fval\" style=\"width:25%;\" value=\"\" /></TD>
           	</TR>
           </TABLE>
+          </fieldset>
           
-          <input type=\"submit\" id=\"dellinkButton\" value=\"Borrar\"/>
-          <input type=\"submit\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
+          <input type=\"submit\" style=\"margin:2px;\" id=\"dellinkButton\" value=\"Borrar\"/>
+          <input type=\"submit\" style=\"margin:2px;\" value=\"#{butTitle}\"/>
         </form></div>"
       urlInput = jQuery('input[name=url]', dialog)
 
@@ -191,13 +292,56 @@
           if not cargadosCombos
               jQuery('.capsel').find('option').clone().appendTo('#filterCapCon1');
               jQuery('.capsel').find('option').clone().appendTo('#filterCapCon2');
+              jQuery('.capsel').find('option').clone().appendTo('#filterCapCon3');
+              jQuery('.capsel').find('option').clone().appendTo('#filterCapCon4');
               jQuery('.inputNumericDialogEditor').numeric();
+              
+              jQuery("input:radio[name=op1]").on("change", ((event)->
+                 if jQuery("input:radio[name=op1]")[0].checked
+                     jQuery("#constante1").hide();
+                     jQuery(".caps1").removeClass("oculto");
+                 else
+                     jQuery("#constante1").show();
+                     jQuery(".caps1").addClass("oculto");
+              ));
+              
+              jQuery("input:radio[name=op2]").on("change", ((event)->
+                 if jQuery("input:radio[name=op2]")[0].checked
+                     jQuery("#constante2").hide();
+                     jQuery(".caps2").removeClass("oculto");
+                 else
+                     jQuery("#constante2").show();
+                     jQuery(".caps2").addClass("oculto");
+              ));
+                            
+              jQuery("input:radio[name=op3]").on("change", ((event)->
+                 if jQuery("input:radio[name=op3]")[0].checked
+                     jQuery("#constante3").hide();
+                     jQuery(".caps3").removeClass("oculto");
+                 else
+                     jQuery("#constante3").show();
+                     jQuery(".caps3").addClass("oculto");
+              ));
+              
+              jQuery("input:radio[name=op4]").on("change", ((event)->
+                 if jQuery("input:radio[name=op4]")[0].checked
+                     jQuery("#constante4").hide();
+                     jQuery(".caps4").removeClass("oculto");
+                 else
+                     jQuery("#constante4").show();
+                     jQuery(".caps4").addClass("oculto");
+              ));              
               cargadosCombos = true
           widget.lastSelection = widget.options.editable.getSelection()
           urlInput = jQuery 'input[name=url]', dialog
           selectionParent = widget.lastSelection.startContainer.parentNode
+          jQuery(".constantes").hide();
           unless selectionParent.href
             urlInput.val(widget.options.defaultUrl)
+            jQuery("input:radio[name=op1]")[0].checked = true;
+            jQuery("input:radio[name=op2]")[0].checked = true;
+            jQuery("input:radio[name=op3]")[0].checked = true;
+            jQuery("input:radio[name=op4]")[0].checked = true;
             jQuery("#filterCapCon1").val ""
             jQuery("#filterPerCon1").val ""
             jQuery("#filterOpe").val ""
