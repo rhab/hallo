@@ -894,7 +894,7 @@
         defaultUrl: 'http://',
         dialogOpts: {
           autoOpen: false,
-          width: 660,
+          width: 750,
           height: 270,
           title: "Ingresar Condici\u00F3n",
           buttonTitle: "Aceptar",
@@ -907,7 +907,7 @@
         buttonCssClass: null
       },
       populateToolbar: function(toolbar) {
-        var butTitle, butUpdateTitle, buttonize, buttonset, cargadosCombos, dialog, dialogId, dialogSubmitBorrar, dialogSubmitCb, existe, isEmptyLink, texto, urlInput, widget,
+        var butTitle, butUpdateTitle, buttonize, buttonset, cargadosCombos, cargarTipoOperando, dialog, dialogId, dialogSubmitBorrar, dialogSubmitCb, existe, generarOperando, ocultarCampos, texto, urlInput, widget,
           _this = this;
         widget = this;
         existe = false;
@@ -916,16 +916,54 @@
         dialogId = "" + this.options.uuid + "-dialog";
         butTitle = this.options.dialogOpts.buttonTitle;
         butUpdateTitle = this.options.dialogOpts.buttonUpdateTitle;
-        dialog = jQuery("<div id=\"" + dialogId + "\">        <form action=\"#\" method=\"post\" class=\"linkForm\">          <input class=\"url\" style=\"display:none\" type=\"text\" name=\"url\"            value=\"" + this.options.defaultUrl + "\" />          <TABLE>          	<TR>	    				<TD style=\"padding: 2px;width:45%;\">			          <fieldset style=\"border:2px solid red;\">			          <legend>Operando 1</legend>			          <input type='radio' name='op1' style='margin: 10px;' value='capsula'>C&aacute;psula</input>  							<input type='radio' name='op1' style='margin: 10px;' value='constante'>Constante</input>			          </br>			          <select id=\"filterCapCon1\" class=\"caps1\" style=\"width:70%;\" title=\"C&aacute;psulas\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una C&aacute;psula --</option>			          </select>			          			          <select id=\"filterPerCon1\" class=\"caps1\" style=\"width:20%;\"  title=\"Periodos\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>			          </select>			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante1\" style=\"width:80%;\" value=\"\" />			          </fieldset>          		</TD>          		<TD style=\"padding: 2px;width:10%;\">			          <fieldset style=\"border:2px solid black;\">			          <legend>Operaci\u00F3n</legend>				          <select id=\"filterOpe\" class=\"filterChooser\" style=\"width:100%;\" title=\"Operaci\u00F3n\">				              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Op.</option>				              <option value=\"+\" data-filter-type=\"\" >&nbsp;+</option>				              <option value=\"-\" data-filter-type=\"\" >&nbsp;-</option>				              <option value=\"*\" data-filter-type=\"\" >&nbsp;*</option>				              <option value=\"/\" data-filter-type=\"\" >&nbsp;/</option>				          </select>				        </fieldset>			        </TD>          		<TD style=\"padding: 2px;width:45%;\">			          <fieldset style=\"border:2px solid blue;\">			          <legend>Operando 2</legend>			          <input type='radio' name='op2' style='margin: 10px;' value='capsula'>C&aacute;psula</input>  							<input type='radio' name='op2' style='margin: 10px;' value='constante'>Constante</input>			          </br>			          <select id=\"filterCapCon2\" class=\"caps2\" style=\"width:70%;\" title=\"C&aacute;psulas\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una C&aacute;psula --</option>			          </select>			          			          <select id=\"filterPerCon2\" class=\"caps2\" style=\"width:20%;\"  title=\"Periodos\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>			          </select>			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante2\" style=\"margin:0px;width:80%;\" value=\"\" />			          </fieldset>			        </TD>            </TR>          </TABLE>                              <TABLE>          	<TR>	    				<TD style=\"padding: 2px;width:45%;\">			          <fieldset style=\"border:2px solid black;\">						    <legend>Comparaci\u00F3n</legend>			          <select id=\"filterComp\" class=\"filterChooser\" style=\"width:25%;\"  title=\"Comparaci\u00F3n\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Comparaci\u00F3n\ --</option>			              <option value=\"=\" data-filter-type=\"\" >=</option>			              <option value=\"<>\" data-filter-type=\"\" ><></option>			              <option value=\"<=\" data-filter-type=\"\" ><=</option>			              <option value=\">=\" data-filter-type=\"\" >>=</option>			              <option value=\"<\" data-filter-type=\"\" ><</option>			              <option value=\">\" data-filter-type=\"\" >></option>			          </select>			          </fieldset>              </TD>            </TR>          </TABLE>                              <TABLE>          	<TR>	    				<TD style=\"padding: 2px;width:45%;\">			          <fieldset style=\"border:2px solid red;\">			          <legend>Operando 3</legend>			          <input type='radio' name='op3' style='margin: 10px;' value='capsula'>C&aacute;psula</input>  							<input type='radio' name='op3' style='margin: 10px;' value='constante'>Constante</input>			          </br>			          <select id=\"filterCapCon3\" class=\"caps3\" style=\"width:70%;\" title=\"C&aacute;psulas\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una C&aacute;psula --</option>			          </select>			          			          <select id=\"filterPerCon3\" class=\"caps3\" style=\"width:20%;\"  title=\"Periodos\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>			          </select>			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante3\" style=\"margin:0px;width:80%;\" value=\"\" />			          </fieldset>          		</TD>          		<TD style=\"padding: 2px;width:10%;\">			          <fieldset style=\"border:2px solid black;\">			          <legend>Operaci\u00F3n</legend>				          <select id=\"filterOpe2\" class=\"filterChooser\" style=\"width:100%;\" title=\"Operaci\u00F3n\">				              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Op.</option>				              <option value=\"+\" data-filter-type=\"\" >&nbsp;+</option>				              <option value=\"-\" data-filter-type=\"\" >&nbsp;-</option>				              <option value=\"*\" data-filter-type=\"\" >&nbsp;*</option>				              <option value=\"/\" data-filter-type=\"\" >&nbsp;/</option>				          </select>				        </fieldset>			        </TD>          		<TD style=\"padding: 2px;width:45%;\">			          <fieldset style=\"border:2px solid blue;\">			          <legend>Operando 4</legend>			          <input type='radio' name='op4' style='margin: 10px;' value='capsula'>C&aacute;psula</input>  							<input type='radio' name='op4' style='margin: 10px;' value='constante'>Constante</input>			          </br>			          <select id=\"filterCapCon4\" class=\"caps4\" style=\"width:70%;\" title=\"C&aacute;psulas\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una C&aacute;psula --</option>			          </select>			          			          <select id=\"filterPerCon4\" class=\"caps4\" style=\"width:20%;\"  title=\"Periodos\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>			          </select>			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante4\" style=\"margin:0px;width:80%;\" value=\"\" />			          </fieldset>			        </TD>            </TR>          </TABLE>                    <fieldset style=\"border:2px solid black;\">			          <legend>Resultado</legend>          <TABLE>          	<TR>	    				<TD style=\"padding: 2px;\">Verdadero:</TD>	    				<TD style=\"padding: 2px;\"><input class=\"inputDialogEditor\" type=\"text\" id=\"tval\" style=\"width:25%;\" value=\"\" /></TD>          	</TR>          	<TR>	    				<TD style=\"padding: 2px;\">Falso:</TD>	    				<TD style=\"padding: 2px;\"><input class=\"inputDialogEditor\" type=\"text\" id=\"fval\" style=\"width:25%;\" value=\"\" /></TD>          	</TR>          </TABLE>          </fieldset>                    <input type=\"submit\" id=\"dellinkButton\" value=\"Borrar\"/>          <input type=\"submit\" id=\"addlinkButton\" value=\"" + butTitle + "\"/>        </form></div>");
+        dialog = jQuery("<div id=\"" + dialogId + "\">        <form action=\"#\" method=\"post\" class=\"linkForm\">          <input class=\"url\" style=\"display:none\" type=\"text\" name=\"url\"            value=\"" + this.options.defaultUrl + "\" />          <TABLE>          	<TR>	    				<TD style=\"padding: 2px;width:45%;\">			          <fieldset style=\"border:2px solid red;\">			          <legend>Operando 1</legend>			          <input type='radio' name='op1' style='margin: 10px;' value='capsula'>C&aacute;psula</input>  							<input type='radio' name='op1' style='margin: 10px;' value='constante'>Constante</input>			          </br>			          <select id=\"filterCapCon1\" class=\"caps1 caps\" style=\"width:70%;\" title=\"C&aacute;psulas\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione C&aacute;psula --</option>			          </select>			          			          <select id=\"filterPerCon1\" class=\"caps1 caps\" style=\"width:25%;\"  title=\"Periodos\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>			          </select>			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante1\" style=\"width:80%;\" value=\"\" />			          </fieldset>          		</TD>          		<TD style=\"padding: 2px;width:10%;\">			          <fieldset style=\"border:2px solid black;\">			          <legend>Operaci\u00F3n</legend>				          <select id=\"filterOpe\" class=\"filterChooser\" style=\"width:100%;\" title=\"Operaci\u00F3n\">				              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Op.</option>				              <option value=\"+\" data-filter-type=\"\" >&nbsp;+</option>				              <option value=\"-\" data-filter-type=\"\" >&nbsp;-</option>				              <option value=\"*\" data-filter-type=\"\" >&nbsp;*</option>				              <option value=\"/\" data-filter-type=\"\" >&nbsp;/</option>				          </select>				        </fieldset>			        </TD>          		<TD style=\"padding: 2px;width:45%;\">			          <fieldset style=\"border:2px solid blue;\">			          <legend>Operando 2</legend>			          <input type='radio' name='op2' style='margin: 10px;' value='capsula'>C&aacute;psula</input>  							<input type='radio' name='op2' style='margin: 10px;' value='constante'>Constante</input>			          </br>			          <select id=\"filterCapCon2\" class=\"caps2 caps\" style=\"width:70%;\" title=\"C&aacute;psulas\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione C&aacute;psula --</option>			          </select>			          			          <select id=\"filterPerCon2\" class=\"caps2 caps\" style=\"width:25%;\"  title=\"Periodos\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>			          </select>			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante2\" style=\"margin:0px;width:80%;\" value=\"\" />			          </fieldset>			        </TD>            </TR>          </TABLE>                              <TABLE>          	<TR>	    				<TD style=\"padding: 2px;width:45%;\">			          <fieldset style=\"border:2px solid black;\">						    <legend>Comparaci\u00F3n</legend>			          <select id=\"filterComp\" class=\"filterChooser\" style=\"width:25%;\"  title=\"Comparaci\u00F3n\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Comparaci\u00F3n\ --</option>			              <option value=\"=\" data-filter-type=\"\" >=</option>			              <option value=\"<>\" data-filter-type=\"\" ><></option>			              <option value=\"<=\" data-filter-type=\"\" ><=</option>			              <option value=\">=\" data-filter-type=\"\" >>=</option>			              <option value=\"<\" data-filter-type=\"\" ><</option>			              <option value=\">\" data-filter-type=\"\" >></option>			          </select>			          </fieldset>              </TD>            </TR>          </TABLE>                              <TABLE>          	<TR>	    				<TD style=\"padding: 2px;width:45%;\">			          <fieldset style=\"border:2px solid red;\">			          <legend>Operando 3</legend>			          <input type='radio' name='op3' style='margin: 10px;' value='capsula'>C&aacute;psula</input>  							<input type='radio' name='op3' style='margin: 10px;' value='constante'>Constante</input>			          </br>			          <select id=\"filterCapCon3\" class=\"caps3 caps\" style=\"width:70%;\" title=\"C&aacute;psulas\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione C&aacute;psula --</option>			          </select>			          			          <select id=\"filterPerCon3\" class=\"caps3 caps\" style=\"width:25%;\"  title=\"Periodos\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>			          </select>			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante3\" style=\"margin:0px;width:80%;\" value=\"\" />			          </fieldset>          		</TD>          		<TD style=\"padding: 2px;width:10%;\">			          <fieldset style=\"border:2px solid black;\">			          <legend>Operaci\u00F3n</legend>				          <select id=\"filterOpe2\" class=\"filterChooser\" style=\"width:100%;\" title=\"Operaci\u00F3n\">				              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Op.</option>				              <option value=\"+\" data-filter-type=\"\" >&nbsp;+</option>				              <option value=\"-\" data-filter-type=\"\" >&nbsp;-</option>				              <option value=\"*\" data-filter-type=\"\" >&nbsp;*</option>				              <option value=\"/\" data-filter-type=\"\" >&nbsp;/</option>				          </select>				        </fieldset>			        </TD>          		<TD style=\"padding: 2px;width:45%;\">			          <fieldset style=\"border:2px solid blue;\">			          <legend>Operando 4</legend>			          <input type='radio' name='op4' style='margin: 10px;' value='capsula'>C&aacute;psula</input>  							<input type='radio' name='op4' style='margin: 10px;' value='constante'>Constante</input>			          </br>			          <select id=\"filterCapCon4\" class=\"caps4 caps\" style=\"width:70%;\" title=\"C&aacute;psulas\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione C&aacute;psula --</option>			          </select>			          			          <select id=\"filterPerCon4\" class=\"caps4 caps\" style=\"width:25%;\"  title=\"Periodos\">			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>			          </select>			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante4\" style=\"margin:0px;width:80%;\" value=\"\" />			          </fieldset>			        </TD>            </TR>          </TABLE>                    <fieldset style=\"border:2px solid black;\">			          <legend>Resultado</legend>          <TABLE>          	<TR>	    				<TD style=\"padding: 2px;\">Verdadero:</TD>	    				<TD style=\"padding: 2px;\"><input class=\"inputDialogEditor\" type=\"text\" id=\"tval\" style=\"width:25%;\" value=\"\" /></TD>          	</TR>          	<TR>	    				<TD style=\"padding: 2px;\">Falso:</TD>	    				<TD style=\"padding: 2px;\"><input class=\"inputDialogEditor\" type=\"text\" id=\"fval\" style=\"width:25%;\" value=\"\" /></TD>          	</TR>          </TABLE>          </fieldset>                    <input type=\"submit\" style=\"margin:6px;\" id=\"dellinkButton\" value=\"Borrar\"/>          <input type=\"submit\" style=\"margin:6px;\" id=\"addlinkButton\" value=\"" + butTitle + "\"/>        </form></div>");
         urlInput = jQuery('input[name=url]', dialog);
-        isEmptyLink = function(link) {
-          if ((new RegExp(/^\s*$/)).test(link)) {
-            return true;
+        cargarTipoOperando = function(tipoOp, nombreSufijo) {
+          if (tipoOp === 'capsula') {
+            jQuery("input:radio[name=op" + nombreSufijo + "]")[0].checked = true;
+            jQuery("#constante" + nombreSufijo).hide();
+            return jQuery(".caps" + nombreSufijo).show();
+          } else {
+            jQuery("input:radio[name=op" + nombreSufijo + "]")[1].checked = true;
+            jQuery("#constante" + nombreSufijo).show();
+            return jQuery(".caps" + nombreSufijo).hide();
           }
-          if (link === widget.options.defaultUrl) {
-            return true;
+        };
+        ocultarCampos = function(nombreSufijo) {
+          return jQuery("input:radio[name=op" + nombreSufijo + "]").on("change", (function(event) {
+            if (jQuery("input:radio[name=op" + nombreSufijo + "]")[0].checked) {
+              jQuery("#constante" + nombreSufijo).hide();
+              return jQuery(".caps" + nombreSufijo).show();
+            } else {
+              jQuery("#constante" + nombreSufijo).show();
+              return jQuery(".caps" + nombreSufijo).hide();
+            }
+          }));
+        };
+        generarOperando = function(nombreSufijo) {
+          var codCap, codPer, funcion;
+          if (jQuery("input:radio[name=op" + nombreSufijo + "]")[0].checked) {
+            codCap = (jQuery("#filterCapCon" + nombreSufijo + " option:selected")).val();
+            codPer = (jQuery("#filterPerCon" + nombreSufijo + " option:selected")).val();
+            if (codCap === "" || codPer === "") {
+              funcion = "";
+              texto = "";
+            } else {
+              funcion = "cap('" + codCap + "','" + codPer + "')";
+              texto = "[C\u00E1psula " + codCap + " del Periodo " + codPer + "]";
+            }
+            return {
+              'dsl': funcion,
+              'txt': texto,
+              'tipo': 'capsula'
+            };
+          } else {
+            return {
+              'dsl': (jQuery("#constante" + nombreSufijo)).val(),
+              'txt': (jQuery("#constante" + nombreSufijo)).val(),
+              'tipo': 'constante'
+            };
           }
-          return false;
         };
         dialogSubmitBorrar = function(event) {
           event.preventDefault();
@@ -936,7 +974,7 @@
           return false;
         };
         dialogSubmitCb = function(event) {
-          var codCapsula1, codCapsula2, codPeriodo1, codPeriodo2, comparacion, fval, link, linkNode, nodoLink, operacion, tval, valcomparar;
+          var codCapsula1, codCapsula2, codCapsula3, codCapsula4, codPeriodo1, codPeriodo2, codPeriodo3, codPeriodo4, comparacion, constante1, constante2, constante3, constante4, fval, link, linkNode, nodoLink, op1f, op2f, op3f, op4f, operacion, operacion2, tval;
           event.preventDefault();
           link = "http://.";
           dialog.dialog('close');
@@ -946,10 +984,22 @@
           operacion = (jQuery("#filterOpe option:selected")).val();
           codCapsula2 = (jQuery("#filterCapCon2 option:selected")).val();
           codPeriodo2 = (jQuery("#filterPerCon2 option:selected")).val();
+          codCapsula3 = (jQuery("#filterCapCon3 option:selected")).val();
+          codPeriodo3 = (jQuery("#filterPerCon3 option:selected")).val();
+          operacion2 = (jQuery("#filterOpe2 option:selected")).val();
+          codCapsula4 = (jQuery("#filterCapCon4 option:selected")).val();
+          codPeriodo4 = (jQuery("#filterPerCon4 option:selected")).val();
           comparacion = (jQuery("#filterComp option:selected")).val();
-          valcomparar = (jQuery("#valcomparar")).val();
+          constante1 = (jQuery("#constante1")).val();
+          constante2 = (jQuery("#constante2")).val();
+          constante3 = (jQuery("#constante3")).val();
+          constante4 = (jQuery("#constante4")).val();
           tval = (jQuery("#tval")).val();
           fval = (jQuery("#fval")).val();
+          op1f = generarOperando('1');
+          op2f = generarOperando('2');
+          op3f = generarOperando('3');
+          op4f = generarOperando('4');
           if (existe) {
             nodoLink = widget.lastSelection.startContainer.parentNode;
             jQuery(nodoLink).attr('data-cap', codCapsula1);
@@ -957,16 +1007,28 @@
             jQuery(nodoLink).attr('data-ope', operacion);
             jQuery(nodoLink).attr('data-cap2', codCapsula2);
             jQuery(nodoLink).attr('data-per2', codPeriodo2);
+            jQuery(nodoLink).attr('data-cap3', codCapsula3);
+            jQuery(nodoLink).attr('data-per3', codPeriodo3);
+            jQuery(nodoLink).attr('data-ope2', operacion2);
+            jQuery(nodoLink).attr('data-cap4', codCapsula4);
+            jQuery(nodoLink).attr('data-per4', codPeriodo4);
             jQuery(nodoLink).attr('data-comp', comparacion);
-            jQuery(nodoLink).attr('data-valcomparar', valcomparar);
+            jQuery(nodoLink).attr('data-constante1', constante1);
+            jQuery(nodoLink).attr('data-constante2', constante2);
+            jQuery(nodoLink).attr('data-constante3', constante3);
+            jQuery(nodoLink).attr('data-constante4', constante4);
+            jQuery(nodoLink).attr('data-tipoOperando1', op1f.tipo);
+            jQuery(nodoLink).attr('data-tipoOperando2', op2f.tipo);
+            jQuery(nodoLink).attr('data-tipoOperando3', op3f.tipo);
+            jQuery(nodoLink).attr('data-tipoOperando4', op4f.tipo);
             jQuery(nodoLink).attr('data-tval', tval);
             jQuery(nodoLink).attr('data-fval', fval);
             jQuery(nodoLink).attr('class', "conResaltadoEditor resaltadoEditor");
-            jQuery(nodoLink).attr('title', "SI [C\u00E1psula " + codCapsula1 + " ## Periodo " + codPeriodo1 + "] " + operacion + " [C\u00E1psula " + codCapsula2 + " ## Periodo " + codPeriodo2 + "] " + comparacion + " " + valcomparar + " ENTONCES " + tval + " SINO " + fval);
-            jQuery(nodoLink).attr('data-dsl', "if(cap(\'" + codCapsula1 + "\',\'" + codPeriodo1 + "\') " + operacion + " cap(\'" + codCapsula2 + "\',\'" + codPeriodo2 + "\')                " + comparacion + " " + valcomparar + ", \'" + tval + "\', \'" + fval + "\')");
+            jQuery(nodoLink).attr('title', "SI " + op1f.txt + " " + operacion + " " + op2f.txt + " " + comparacion + " " + op3f.txt + " " + operacion2 + " " + op4f.txt + " ENTONCES " + tval + " SINO " + fval);
+            jQuery(nodoLink).attr('data-dsl', "if(" + op1f.dsl + " " + operacion + " " + op2f.dsl + " " + comparacion + " " + op3f.dsl + " " + operacion2 + " " + op4f.dsl + ",                 '" + tval + "', '" + fval + "')");
           } else {
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue;
-            linkNode = jQuery("<a class=\"conResaltadoEditor resaltadoEditor\"             title=\"SI [C\u00E1psula " + codCapsula1 + " ## Periodo " + codPeriodo1 + "] " + operacion + " [C\u00E1psula " + codCapsula2 + " ## Periodo " + codPeriodo2 + "] " + comparacion + " " + valcomparar + " ENTONCES " + tval + " SINO " + fval + "\"             data-dsl=\"if(cap(\'" + codCapsula1 + "\',\'" + codPeriodo1 + "\') " + operacion + " cap(\'" + codCapsula2 + "\',\'" + codPeriodo2 + "\')            " + comparacion + " " + valcomparar + ", \'" + tval + "\', \'" + fval + "\')\"             data-cap=\"" + codCapsula1 + "\"             data-per=\"" + codPeriodo1 + "\"             data-ope=\"" + operacion + "\"             data-cap2=\"" + codCapsula2 + "\"             data-per2=\"" + codPeriodo2 + "\"             data-comp=\"" + comparacion + "\"             data-valcomparar=\"" + valcomparar + "\"             data-tval=\"" + tval + "\"             data-fval=\"" + fval + "\"             href='" + link + "'>" + texto + "</a>")[0];
+            linkNode = jQuery("<a class=\"conResaltadoEditor resaltadoEditor\"             title=\"SI " + op1f.txt + " " + operacion + " " + op2f.txt + " " + comparacion + " " + op3f.txt + " " + operacion2 + " " + op4f.txt + " ENTONCES " + tval + " SINO " + fval + "\"             data-dsl=\"if(" + op1f.dsl + " " + operacion + " " + op2f.dsl + " " + comparacion + " " + op3f.dsl + " " + operacion2 + " " + op4f.dsl + ",                 '" + tval + "', '" + fval + "')\"             data-cap=\"" + codCapsula1 + "\"             data-per=\"" + codPeriodo1 + "\"             data-ope=\"" + operacion + "\"             data-cap2=\"" + codCapsula2 + "\"             data-per2=\"" + codPeriodo2 + "\"             data-comp=\"" + comparacion + "\"                         data-cap=\"" + codCapsula3 + "\"             data-per=\"" + codPeriodo3 + "\"             data-ope=\"" + operacion2 + "\"             data-cap2=\"" + codCapsula4 + "\"             data-per2=\"" + codPeriodo4 + "\"                         data-constante1=\"" + constante1 + "\"             data-constante2=\"" + constante2 + "\"             data-constante3=\"" + constante3 + "\"             data-constante4=\"" + constante4 + "\"                         data-tipoOperando1=\"" + op1f.tipo + "\"            data-tipoOperando2=\"" + op2f.tipo + "\"            data-tipoOperando3=\"" + op3f.tipo + "\"            data-tipoOperando4=\"" + op4f.tipo + "\"                        data-tval=\"" + tval + "\"             data-fval=\"" + fval + "\"             href='" + link + "'>" + texto + "</a>")[0];
             widget.lastSelection.insertNode(linkNode);
           }
           widget.options.editable.element.trigger('change');
@@ -991,49 +1053,17 @@
           buttonset.append(buttonHolder);
           button = buttonHolder;
           button.on("click", function(event) {
-            var selectionParent;
+            var selectionParent, tipoOp1, tipoOp2, tipoOp3, tipoOp4;
             if (!cargadosCombos) {
               jQuery('.capsel').find('option').clone().appendTo('#filterCapCon1');
               jQuery('.capsel').find('option').clone().appendTo('#filterCapCon2');
               jQuery('.capsel').find('option').clone().appendTo('#filterCapCon3');
               jQuery('.capsel').find('option').clone().appendTo('#filterCapCon4');
               jQuery('.inputNumericDialogEditor').numeric();
-              jQuery("input:radio[name=op1]").on("change", (function(event) {
-                if (jQuery("input:radio[name=op1]")[0].checked) {
-                  jQuery("#constante1").hide();
-                  return jQuery(".caps1").removeClass("oculto");
-                } else {
-                  jQuery("#constante1").show();
-                  return jQuery(".caps1").addClass("oculto");
-                }
-              }));
-              jQuery("input:radio[name=op2]").on("change", (function(event) {
-                if (jQuery("input:radio[name=op2]")[0].checked) {
-                  jQuery("#constante2").hide();
-                  return jQuery(".caps2").removeClass("oculto");
-                } else {
-                  jQuery("#constante2").show();
-                  return jQuery(".caps2").addClass("oculto");
-                }
-              }));
-              jQuery("input:radio[name=op3]").on("change", (function(event) {
-                if (jQuery("input:radio[name=op3]")[0].checked) {
-                  jQuery("#constante3").hide();
-                  return jQuery(".caps3").removeClass("oculto");
-                } else {
-                  jQuery("#constante3").show();
-                  return jQuery(".caps3").addClass("oculto");
-                }
-              }));
-              jQuery("input:radio[name=op4]").on("change", (function(event) {
-                if (jQuery("input:radio[name=op4]")[0].checked) {
-                  jQuery("#constante4").hide();
-                  return jQuery(".caps4").removeClass("oculto");
-                } else {
-                  jQuery("#constante4").show();
-                  return jQuery(".caps4").addClass("oculto");
-                }
-              }));
+              ocultarCampos('1');
+              ocultarCampos('2');
+              ocultarCampos('3');
+              ocultarCampos('4');
               cargadosCombos = true;
             }
             widget.lastSelection = widget.options.editable.getSelection();
@@ -1046,13 +1076,11 @@
               jQuery("input:radio[name=op2]")[0].checked = true;
               jQuery("input:radio[name=op3]")[0].checked = true;
               jQuery("input:radio[name=op4]")[0].checked = true;
-              jQuery("#filterCapCon1").val("");
-              jQuery("#filterPerCon1").val("");
+              jQuery(".caps").val("");
               jQuery("#filterOpe").val("");
-              jQuery("#filterPerCon2").val("");
-              jQuery("#filterCapCon2").val("");
+              jQuery("#filterOpe2").val("");
               jQuery("#filterComp").val("");
-              jQuery("#valcomparar").val("");
+              jQuery(".constantes").val("");
               jQuery("#tval").val("");
               jQuery("#fval").val("");
               existe = false;
@@ -1064,9 +1092,25 @@
               jQuery("#filterCapCon2").val(jQuery(selectionParent).attr('data-cap2'));
               jQuery("#filterPerCon2").val(jQuery(selectionParent).attr('data-per2'));
               jQuery("#filterComp").val(jQuery(selectionParent).attr('data-comp'));
-              jQuery("#valcomparar").val(jQuery(selectionParent).attr('data-valcomparar'));
+              jQuery("#filterCapCon3").val(jQuery(selectionParent).attr('data-cap3'));
+              jQuery("#filterPerCon3").val(jQuery(selectionParent).attr('data-per3'));
+              jQuery("#filterOpe2").val(jQuery(selectionParent).attr('data-ope2'));
+              jQuery("#filterCapCon4").val(jQuery(selectionParent).attr('data-cap4'));
+              jQuery("#filterPerCon4").val(jQuery(selectionParent).attr('data-per4'));
+              jQuery("#valcomparar").val(jQuery(selectionParent).attr('data-constante1'));
+              jQuery("#valcomparar").val(jQuery(selectionParent).attr('data-constante2'));
+              jQuery("#valcomparar").val(jQuery(selectionParent).attr('data-constante3'));
+              jQuery("#valcomparar").val(jQuery(selectionParent).attr('data-constante4'));
               jQuery("#tval").val(jQuery(selectionParent).attr('data-tval'));
               jQuery("#fval").val(jQuery(selectionParent).attr('data-fval'));
+              tipoOp1 = jQuery(selectionParent).attr('data-tipoOperando1');
+              tipoOp2 = jQuery(selectionParent).attr('data-tipoOperando2');
+              tipoOp3 = jQuery(selectionParent).attr('data-tipoOperando3');
+              tipoOp4 = jQuery(selectionParent).attr('data-tipoOperando4');
+              cargarTipoOperando(tipoOp1, '1');
+              cargarTipoOperando(tipoOp2, '2');
+              cargarTipoOperando(tipoOp3, '3');
+              cargarTipoOperando(tipoOp4, '4');
               texto = jQuery(selectionParent).text();
               existe = true;
             }
