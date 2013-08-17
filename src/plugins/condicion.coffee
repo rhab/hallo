@@ -62,7 +62,7 @@
           		<TD style=\"padding: 2px;width:10%;\">
 			          <fieldset style=\"border:2px solid black;\">
 			          <legend>Operaci\u00F3n</legend>
-				          <select id=\"filterOpe\" class=\"filterChooser\" style=\"width:100%;\" title=\"Operaci\u00F3n\">
+				          <select id=\"filterOpe\" class=\"filterChooser\" style=\"width:100%;font-size: 14px;font-weight: bold;\" title=\"Operaci\u00F3n\">
 				              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Op.</option>
 				              <option value=\"+\" data-filter-type=\"\" >&nbsp;+</option>
 				              <option value=\"-\" data-filter-type=\"\" >&nbsp;-</option>
@@ -103,9 +103,9 @@
 	    				<TD style=\"padding: 2px;width:45%;\">
 			          <fieldset style=\"border:2px solid black;\">
 						    <legend>Comparaci\u00F3n</legend>
-			          <select id=\"filterComp\" class=\"filterChooser\" style=\"width:25%;\"  title=\"Comparaci\u00F3n\">
+			          <select id=\"filterComp\" class=\"filterChooser\" style=\"width:25%;font-size: 14px;font-weight: bold;\" title=\"Comparaci\u00F3n\">
 			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Comparaci\u00F3n\ --</option>
-			              <option value=\"=\" data-filter-type=\"\" >=</option>
+			              <option value=\"=\" data-filter-type=\"\" >==</option>
 			              <option value=\"<>\" data-filter-type=\"\" ><></option>
 			              <option value=\"<=\" data-filter-type=\"\" ><=</option>
 			              <option value=\">=\" data-filter-type=\"\" >>=</option>
@@ -147,7 +147,7 @@
           		<TD style=\"padding: 2px;width:10%;\">
 			          <fieldset style=\"border:2px solid black;\">
 			          <legend>Operaci\u00F3n</legend>
-				          <select id=\"filterOpe2\" class=\"filterChooser\" style=\"width:100%;\" title=\"Operaci\u00F3n\">
+				          <select id=\"filterOpe2\" class=\"filterChooser\" style=\"width:100%;font-size: 14px;font-weight: bold;\" title=\"Operaci\u00F3n\">
 				              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Op.</option>
 				              <option value=\"+\" data-filter-type=\"\" >&nbsp;+</option>
 				              <option value=\"-\" data-filter-type=\"\" >&nbsp;-</option>
@@ -288,6 +288,7 @@
         
         #widget.lastSelection.collapse(true);
         if existe
+            #actualizo el los atributos del link actual
             #document.execCommand "unlink", null, ""
             nodoLink = widget.lastSelection.startContainer.parentNode
             jQuery(nodoLink).attr('data-cap', codCapsula1)
@@ -320,6 +321,7 @@
             jQuery(nodoLink).attr('data-dsl', "if(#{op1f.dsl} #{operacion} #{op2f.dsl} #{comparacion} #{op3f.dsl} #{operacion2} #{op4f.dsl}, 
                 '#{tval}', '#{fval}')")
         else
+            #creo un link con los datos de la capsula
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue
             linkNode = jQuery("<a class=\"conResaltadoEditor resaltadoEditor\" 
             title=\"SI #{op1f.txt} #{operacion} #{op2f.txt} #{comparacion} #{op3f.txt} #{operacion2} #{op4f.txt} ENTONCES #{tval} SINO #{fval}\" 
@@ -332,11 +334,11 @@
             data-per2=\"#{codPeriodo2}\" 
             data-comp=\"#{comparacion}\" 
             
-            data-cap=\"#{codCapsula3}\" 
-            data-per=\"#{codPeriodo3}\" 
-            data-ope=\"#{operacion2}\" 
-            data-cap2=\"#{codCapsula4}\" 
-            data-per2=\"#{codPeriodo4}\" 
+            data-cap3=\"#{codCapsula3}\" 
+            data-per3=\"#{codPeriodo3}\" 
+            data-ope2=\"#{operacion2}\" 
+            data-cap4=\"#{codCapsula4}\" 
+            data-per4=\"#{codPeriodo4}\" 
             
             data-constante1=\"#{constante1}\" 
             data-constante2=\"#{constante2}\" 
@@ -376,10 +378,10 @@
         button.on "click", (event) ->
           # we need to save the current selection because we will lose focus
           if not cargadosCombos
-              jQuery('.capsel').find('option').clone().appendTo('#filterCapCon1');
-              jQuery('.capsel').find('option').clone().appendTo('#filterCapCon2');
-              jQuery('.capsel').find('option').clone().appendTo('#filterCapCon3');
-              jQuery('.capsel').find('option').clone().appendTo('#filterCapCon4');
+              jQuery('.capselNumericas').find('option').clone().appendTo('#filterCapCon1');
+              jQuery('.capselNumericas').find('option').clone().appendTo('#filterCapCon2');
+              jQuery('.capselNumericas').find('option').clone().appendTo('#filterCapCon3');
+              jQuery('.capselNumericas').find('option').clone().appendTo('#filterCapCon4');
               jQuery('.inputNumericDialogEditor').numeric();
               
               ocultarCampos '1'
@@ -399,6 +401,12 @@
             jQuery("input:radio[name=op2]")[0].checked = true;
             jQuery("input:radio[name=op3]")[0].checked = true;
             jQuery("input:radio[name=op4]")[0].checked = true;
+            
+            jQuery("input:radio[name=op1]").trigger("change");
+            jQuery("input:radio[name=op2]").trigger("change");
+            jQuery("input:radio[name=op3]").trigger("change");
+            jQuery("input:radio[name=op4]").trigger("change");
+            
             jQuery(".caps").val ""
             jQuery("#filterOpe").val ""
             jQuery("#filterOpe2").val ""
@@ -422,10 +430,10 @@
             jQuery("#filterCapCon4").val jQuery(selectionParent).attr('data-cap4')
             jQuery("#filterPerCon4").val jQuery(selectionParent).attr('data-per4')
             
-            jQuery("#valcomparar").val jQuery(selectionParent).attr('data-constante1')
-            jQuery("#valcomparar").val jQuery(selectionParent).attr('data-constante2')
-            jQuery("#valcomparar").val jQuery(selectionParent).attr('data-constante3')
-            jQuery("#valcomparar").val jQuery(selectionParent).attr('data-constante4')
+            jQuery("#constante1").val jQuery(selectionParent).attr('data-constante1')
+            jQuery("#constante2").val jQuery(selectionParent).attr('data-constante2')
+            jQuery("#constante3").val jQuery(selectionParent).attr('data-constante3')
+            jQuery("#constante4").val jQuery(selectionParent).attr('data-constante4')
             
             jQuery("#tval").val jQuery(selectionParent).attr('data-tval')
             jQuery("#fval").val jQuery(selectionParent).attr('data-fval')
