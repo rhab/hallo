@@ -30,7 +30,7 @@
       dialogId = "#{@options.uuid}-dialog"
       butTitle = @options.dialogOpts.buttonTitle
       butUpdateTitle = @options.dialogOpts.buttonUpdateTitle
-      dialog = jQuery "<div id=\"#{dialogId}\">
+      dialog = jQuery "<div id=\"#{dialogId}\" style=\"cursor:default;\">
         <form action=\"#\" method=\"post\" class=\"linkForm\">
           <input class=\"url\" style=\"display:none\" type=\"text\" name=\"url\"
             value=\"#{@options.defaultUrl}\" />
@@ -40,8 +40,7 @@
           </select>
           
           <select id=\"filterPerDia\" class=\"filterChooser\" style=\"width:20%;\" title=\"Periodos\">
-              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Periodo</option>
-              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
+              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
 							<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
 							<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
 							<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
@@ -71,7 +70,7 @@
         event.preventDefault()
 
         #link = urlInput.val()
-        link = "http://."
+        link = "javascript:void(0)"
         dialog.dialog('close')
 
         widget.options.editable.restoreSelection(widget.lastSelection)
@@ -139,6 +138,7 @@
 
           widget.options.editable.keepActivated true
           dialog.dialog('open').dialog({ position: { my: "top", at: "top", of: window } })
+          toolbar.hide()
 
           dialog.on 'dialogclose', ->
             widget.options.editable.restoreSelection widget.lastSelection

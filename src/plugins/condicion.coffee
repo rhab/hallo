@@ -11,12 +11,13 @@
       dialogOpts:
         autoOpen: false
         width: 750
-        height: 270
+        height: "auto"
         title: "Ingresar Condici\u00F3n"
         buttonTitle: "Aceptar"
         buttonUpdateTitle: "Aceptar"
         modal: true
         resizable: false
+        stack: true
         draggable: true
         dialogClass: 'condicion-dialog'
       buttonCssClass: null 
@@ -30,7 +31,7 @@
       dialogId = "#{@options.uuid}-dialog"
       butTitle = @options.dialogOpts.buttonTitle
       butUpdateTitle = @options.dialogOpts.buttonUpdateTitle
-      dialog = jQuery "<div id=\"#{dialogId}\">
+      dialog = jQuery "<div id=\"#{dialogId}\" style=\"cursor:default;\">
         <form action=\"#\" method=\"post\" class=\"linkForm\">
           <input class=\"url\" style=\"display:none\" type=\"text\" name=\"url\"
             value=\"#{@options.defaultUrl}\" />
@@ -47,8 +48,7 @@
 			          </select>
 			          
 			          <select id=\"filterPerCon1\" class=\"caps1 caps\" style=\"width:25%;\"  title=\"Periodos\">
-			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>
-			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
+			              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
 										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
 										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
 										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
@@ -82,8 +82,7 @@
 			          </select>
 			          
 			          <select id=\"filterPerCon2\" class=\"caps2 caps\" style=\"width:25%;\"  title=\"Periodos\">
-			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>
-			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
+			              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
 										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
 										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
 										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
@@ -132,8 +131,7 @@
 			          </select>
 			          
 			          <select id=\"filterPerCon3\" class=\"caps3 caps\" style=\"width:25%;\"  title=\"Periodos\">
-			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>
-			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
+			              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
 										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
 										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
 										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
@@ -167,8 +165,7 @@
 			          </select>
 			          
 			          <select id=\"filterPerCon4\" class=\"caps4 caps\" style=\"width:25%;\"  title=\"Periodos\">
-			              <option value=\"\" data-filter-type=\"\" selected=\"selected\">Per.</option>
-			              <option value=\"ACT\" data-filter-type=\"stringMatch\">ACT</option>
+			              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
 										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
 										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
 										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
@@ -196,9 +193,16 @@
           </TABLE>
           </fieldset>
           
+          <fieldset style=\"border:2px solid black;\">
+			          <legend>Texto</legend>
+          <div id='dialogTextoId' class='contenidoEditorDialog'>
+          </div>
+          </fieldset>
+          
           <input type=\"submit\" style=\"margin:6px;\" id=\"dellinkButton\" value=\"Borrar\"/>
           <input type=\"submit\" style=\"margin:6px;\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
-        </form></div>"
+        </form>
+        </div>"
       urlInput = jQuery('input[name=url]', dialog)
 
       cargarTipoOperando = (tipoOp, nombreSufijo ) ->
@@ -255,7 +259,7 @@
         event.preventDefault()
 
         #link = urlInput.val()
-        link = "http://."
+        link = "javascript:void(0)"
         dialog.dialog('close')
 
         #Extrae los valores q selecciono el usr para generar el lenguaje dsl
@@ -395,6 +399,7 @@
           urlInput = jQuery 'input[name=url]', dialog
           selectionParent = widget.lastSelection.startContainer.parentNode
           jQuery(".constantes").hide();
+          jQuery("#dialogTextoId").html jQuery('div.editable').html()
           unless selectionParent.href
             urlInput.val(widget.options.defaultUrl)
             jQuery("input:radio[name=op1]")[0].checked = true;
@@ -453,6 +458,7 @@
 
           widget.options.editable.keepActivated true
           dialog.dialog('open').dialog({ position: { my: "top", at: "top", of: window } })
+          toolbar.hide()
 
           dialog.on 'dialogclose', ->
             widget.options.editable.restoreSelection widget.lastSelection
