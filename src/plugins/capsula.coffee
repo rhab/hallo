@@ -40,13 +40,6 @@
           </select>
           
           <select id=\"filterPer\" class=\"filterChooser\" style=\"width:15%;\" title=\"Periodos\">
-              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
-							<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
-							<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
-							<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
-							<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
-							<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
-							<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
           </select><br />
           <input type=\"submit\" id=\"dellinkButton\" value=\"Borrar\"/>
           <input type=\"submit\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
@@ -119,7 +112,9 @@
         button.on "click", (event) ->
           # we need to save the current selection because we will lose focus
           if not cargadosCombos
-              jQuery('.capsel').find('option').clone().appendTo('#filterCap');
+              jQuery('.capsel').find('option').clone().appendTo('#filterCap')
+              jQuery('.periodosIndices').find('option').clone().appendTo('#filterPer')
+              jQuery('#filterPer').val('ACT')
               cargadosCombos = true
           widget.lastSelection = widget.options.editable.getSelection()
           urlInput = jQuery 'input[name=url]', dialog

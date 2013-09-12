@@ -48,13 +48,6 @@
 			          </select>
 			          
 			          <select id=\"filterPerCon1\" class=\"caps1 caps\" style=\"width:25%;\"  title=\"Periodos\">
-			              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
-										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
-										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
-										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
-										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
-										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
-										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
 			          </select>
 			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante1\" style=\"width:80%;\" value=\"\" />
 			          </fieldset>
@@ -82,13 +75,6 @@
 			          </select>
 			          
 			          <select id=\"filterPerCon2\" class=\"caps2 caps\" style=\"width:25%;\"  title=\"Periodos\">
-			              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
-										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
-										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
-										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
-										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
-										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
-										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
 			          </select>
 			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante2\" style=\"margin:0px;width:80%;\" value=\"\" />
 			          </fieldset>
@@ -131,13 +117,6 @@
 			          </select>
 			          
 			          <select id=\"filterPerCon3\" class=\"caps3 caps\" style=\"width:25%;\"  title=\"Periodos\">
-			              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
-										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
-										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
-										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
-										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
-										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
-										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
 			          </select>
 			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante3\" style=\"margin:0px;width:80%;\" value=\"\" />
 			          </fieldset>
@@ -165,13 +144,6 @@
 			          </select>
 			          
 			          <select id=\"filterPerCon4\" class=\"caps4 caps\" style=\"width:25%;\"  title=\"Periodos\">
-			              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
-										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
-										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
-										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
-										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
-										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
-										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
 			          </select>
 			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constante4\" style=\"margin:0px;width:80%;\" value=\"\" />
 			          </fieldset>
@@ -386,6 +358,16 @@
               jQuery('.capselNumericas').find('option').clone().appendTo('#filterCapCon2');
               jQuery('.capselNumericas').find('option').clone().appendTo('#filterCapCon3');
               jQuery('.capselNumericas').find('option').clone().appendTo('#filterCapCon4');
+              
+              jQuery('.periodosIndices').find('option').clone().appendTo('#filterPerCon1')
+              jQuery('.periodosIndices').find('option').clone().appendTo('#filterPerCon2')
+              jQuery('.periodosIndices').find('option').clone().appendTo('#filterPerCon3')
+              jQuery('.periodosIndices').find('option').clone().appendTo('#filterPerCon4')
+              jQuery('#filterPerCon1').val('ACT')
+              jQuery('#filterPerCon2').val('ACT')
+              jQuery('#filterPerCon3').val('ACT')
+              jQuery('#filterPerCon4').val('ACT')
+              
               jQuery('.inputNumericDialogEditor').numeric();
               
               ocultarCampos '1'

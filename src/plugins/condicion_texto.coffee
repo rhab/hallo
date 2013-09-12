@@ -46,13 +46,6 @@
 			          </select>
 			          
 			          <select id=\"filterPerConT1\" class=\"caps1 caps\" style=\"width:25%;\"  title=\"Periodos\">
-			              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
-										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
-										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
-										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
-										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
-										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
-										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
 			          </select>
 			          <input class=\"inputNumericDialogEditor constantes\" type=\"text\" id=\"constanteT1\" style=\"width:80%;\" value=\"\" />
 			          </fieldset>
@@ -78,13 +71,6 @@
 			          </select>
 			          
 			          <select id=\"filterPerConT2\" class=\"caps2 caps\" style=\"width:25%;\"  title=\"Periodos\">
-			              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
-										<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
-										<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
-										<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
-										<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
-										<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
-										<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
 			          </select>
 			          <input class=\"constantes\" type=\"text\" id=\"constanteT2\" style=\"margin:0px;width:80%;\" value=\"\" />
 			          </fieldset>
@@ -256,6 +242,11 @@
           if not cargadosCombos
               jQuery('.capselTexto').find('option').clone().appendTo('#filterCapConT1');
               jQuery('.capselTexto').find('option').clone().appendTo('#filterCapConT2');
+              
+              jQuery('.periodosIndices').find('option').clone().appendTo('#filterPerConT1')
+              jQuery('.periodosIndices').find('option').clone().appendTo('#filterPerConT2')
+              jQuery('#filterPerConT1').val('ACT')
+              jQuery('#filterPerConT2').val('ACT')
               
               #ocultarCampos '1'
               ocultarCampos '2'

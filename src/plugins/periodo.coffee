@@ -36,13 +36,6 @@
             value=\"#{@options.defaultUrl}\" />
             
           <select id=\"filterPerPer\" class=\"filterChooser\" title=\"Periodos\">
-              <option value=\"ACT\" data-filter-type=\"stringMatch\" selected=\"selected\">ACT</option>
-							<option value=\"ANT_1\" data-filter-type=\"stringMatch\">ANT_1</option>
-							<option value=\"POS_1\" data-filter-type=\"stringMatch\">POS_1</option>
-							<option value=\"ANT_2\" data-filter-type=\"stringMatch\">ANT_2</option>
-							<option value=\"POS_2\" data-filter-type=\"stringMatch\">POS_2</option>
-							<option value=\"ANT_3\" data-filter-type=\"stringMatch\">ANT_3</option>
-							<option value=\"POS_3\" data-filter-type=\"stringMatch\">POS_3</option>
           </select><br />
           <input type=\"submit\" id=\"dellinkButton\" value=\"Borrar\"/>
           <input type=\"submit\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
@@ -112,7 +105,8 @@
         button.on "click", (event) ->
           # we need to save the current selection because we will lose focus
           if not cargadosCombos
-              #jQuery('.diasel').find('option').clone().appendTo('#filterDia');
+              jQuery('.periodosIndices').find('option').clone().appendTo('#filterPerPer')
+              jQuery('#filterPerPer').val('ACT')
               cargadosCombos = true
           widget.lastSelection = widget.options.editable.getSelection()
           urlInput = jQuery 'input[name=url]', dialog
