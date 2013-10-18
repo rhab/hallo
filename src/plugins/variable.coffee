@@ -1,7 +1,7 @@
-#     AKELAB Diagnostico
+#     AKELAB Variable
 #     2013
 ((jQuery) ->
-  jQuery.widget "IKS.diagnostico",
+  jQuery.widget "IKS.variable",
     options:
       editable: null
       uuid: ""
@@ -11,14 +11,14 @@
       dialogOpts:
         autoOpen: false
         width: 540
-        height: 200
-        title: "Ingresar Diagn\u00F3stico"
+        height: 'auto'
+        title: "Ingresar Variable"
         buttonTitle: "Aceptar"
         buttonUpdateTitle: "Aceptar"
         modal: true
         resizable: false
         draggable: true
-        dialogClass: 'diagnostico-dialog'
+        dialogClass: 'variable-dialog'
       buttonCssClass: null 
 
     populateToolbar: (toolbar) ->
@@ -35,22 +35,14 @@
           <input class=\"url\" style=\"display:none\" type=\"text\" name=\"url\"
             value=\"#{@options.defaultUrl}\" />
             
-          <select id=\"filterDia\" class=\"filterChooser\" style=\"width:45%;\" title=\"Diagn\u00F3sticos\">
-              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione un Diagn\u00F3stico --</option>
-          </select>
-          
-          <select id=\"filterPerDia\" class=\"filterChooser\" style=\"width:20%;\" title=\"Periodos\">
+          <select id=\"filterVariables\" class=\"filterChooser\" title=\"Variables\">
+              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una variable --</option>
           </select><br />
           <input type=\"submit\" id=\"dellinkButton\" value=\"Borrar\"/>
           <input type=\"submit\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
         </form></div>"
       urlInput = jQuery('input[name=url]', dialog)
-
-      isEmptyLink = (link) ->
-        return true if (new RegExp(/^\s*$/)).test link
-        return true if link is widget.options.defaultUrl
-        false
-
+                
       dialogSubmitBorrar = (event) ->
         event.preventDefault()
         dialog.dialog('close')
@@ -62,35 +54,29 @@
       dialogSubmitCb = (event) ->
         event.preventDefault()
 
-        #link = urlInput.val()
         link = "javascript:void(0)"
         dialog.dialog('close')
 
+        #Extrae los valores q selecciono el usr para generar el lenguaje dsl
         widget.options.editable.restoreSelection(widget.lastSelection)
-        codCapsula = (jQuery "#filterDia option:selected").val()
-        codPeriodo = (jQuery "#filterPerDia option:selected").val()
+        codVariable = (jQuery "#filterVariables option:selected").val()
         
-        if codCapsula is ""
-            resaltado = "diaOscuroResaltadoEditor"
-        else
-            resaltado = "diaResaltadoEditor"
-            
         #widget.lastSelection.collapse(true);
         if existe
+            #actualizo el los atributos del link actual
             #document.execCommand "unlink", null, ""
             nodoLink = widget.lastSelection.startContainer.parentNode
-            jQuery(nodoLink).attr('data-cap', codCapsula)
-            jQuery(nodoLink).attr('data-per', codPeriodo)
-            jQuery(nodoLink).attr('class', resaltado + " resaltadoEditor")
-            jQuery(nodoLink).attr('title', "Diagn\u00F3stico #{codCapsula} ## Periodo #{codPeriodo}")
-            jQuery(nodoLink).attr('data-dsl', "dia(\'#{codCapsula}\',\'#{codPeriodo}\')")
+            jQuery(nodoLink).attr('data-codVariable', codVariable)
+            jQuery(nodoLink).attr('class', "variableResaltadoEditor resaltadoEditor")
+            jQuery(nodoLink).attr('title', "Variable: #{codVariable}")
+            jQuery(nodoLink).attr('data-dsl', "'#{codVariable}'")
         else
+            #creo un link con los datos de la capsula
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue
-            linkNode = jQuery("<a class=\"" + resaltado + " resaltadoEditor\" 
-            title=\"Diagn\u00F3stico #{codCapsula} ## Periodo #{codPeriodo}\" 
-            data-dsl=\"dia('#{codCapsula}','#{codPeriodo}')\" 
-            data-cap=\"#{codCapsula}\" 
-            data-per=\"#{codPeriodo}\" 
+            linkNode = jQuery("<a class=\"variableResaltadoEditor resaltadoEditor\" 
+            title=\"Variable: #{codVariable}\" 
+            data-dsl=\"'#{codVariable}'\" 
+            data-codVariable=\"#{codVariable}\" 
             href='#{link}'>#{texto}</a>")[0];
             widget.lastSelection.insertNode(linkNode);
         widget.options.editable.element.trigger('change')
@@ -99,14 +85,13 @@
       dialog.find("#addlinkButton").click dialogSubmitCb
       dialog.find("#dellinkButton").click dialogSubmitBorrar
       
-
       buttonset = jQuery "<span class=\"#{widget.widgetName}\"></span>"
       buttonize = (type) =>
         id = "#{@options.uuid}-#{type}"
         buttonHolder = jQuery '<span></span>'
         buttonHolder.hallobutton
-          label: 'Diagn\u00F3stico'
-          icon: 'diagnostico-button'
+          label: 'Variable'
+          icon: 'variable-button'
           editable: @options.editable
           command: null
           queryState: false
@@ -117,22 +102,21 @@
         button.on "click", (event) ->
           # we need to save the current selection because we will lose focus
           if not cargadosCombos
-              jQuery('.diasel').find('option').clone().appendTo('#filterDia');
-              jQuery('.periodosIndices').find('option').clone().appendTo('#filterPerDia')
-              jQuery('#filterPerDia').val('ACT')
+              jQuery('.variablesEditor').find('option').clone().appendTo('#filterVariables');
+                            
               cargadosCombos = true
+              
           widget.lastSelection = widget.options.editable.getSelection()
           urlInput = jQuery 'input[name=url]', dialog
           selectionParent = widget.lastSelection.startContainer.parentNode
+          #Abrir dialogo 1ro no existe resaltado
           unless selectionParent.href
             urlInput.val(widget.options.defaultUrl)
-            jQuery("#filterDia").val ""
-            jQuery("#filterPerDia").val ""
+            jQuery("#filterVariables").val ""
             existe = false
           else
             urlInput.val(jQuery(selectionParent).attr('href'))
-            jQuery("#filterDia").val jQuery(selectionParent).attr('data-cap')
-            jQuery("#filterPerDia").val jQuery(selectionParent).attr('data-per')
+            jQuery("#filterVariables").val jQuery(selectionParent).attr('data-codVariable')
             texto = jQuery(selectionParent).text()
             existe = true
 

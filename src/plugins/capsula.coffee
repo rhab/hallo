@@ -70,18 +70,23 @@
         codCapsula = (jQuery "#filterCap option:selected").val()
         codPeriodo = (jQuery "#filterPer option:selected").val()
         
+        if codCapsula is ""
+            resaltado = "capOscuroResaltadoEditor"
+        else
+            resaltado = "capResaltadoEditor"
+        
         #widget.lastSelection.collapse(true);
         if existe
             #document.execCommand "unlink", null, ""
             nodoLink = widget.lastSelection.startContainer.parentNode
             jQuery(nodoLink).attr('data-cap', codCapsula)
             jQuery(nodoLink).attr('data-per', codPeriodo)
-            jQuery(nodoLink).attr('class', "capResaltadoEditor resaltadoEditor")
+            jQuery(nodoLink).attr('class', resaltado + " resaltadoEditor")
             jQuery(nodoLink).attr('title', "C\u00E1psula #{codCapsula} ## Periodo #{codPeriodo}")
             jQuery(nodoLink).attr('data-dsl', "capf(\'#{codCapsula}\',\'#{codPeriodo}\')")
         else
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue
-            linkNode = jQuery("<a class=\"capResaltadoEditor resaltadoEditor\" 
+            linkNode = jQuery("<a class=\"" + resaltado + " resaltadoEditor\" 
             title=\"C&aacute;psula #{codCapsula} ## Periodo #{codPeriodo}\" 
             data-dsl=\"capf('#{codCapsula}','#{codPeriodo}')\" 
             data-cap=\"#{codCapsula}\" 
@@ -101,7 +106,7 @@
         buttonHolder = jQuery '<span></span>'
         buttonHolder.hallobutton
           label: 'C&aacute;psula'
-          icon: 'icon-cogs'
+          icon: 'capsula-button'
           editable: @options.editable
           command: null
           queryState: false

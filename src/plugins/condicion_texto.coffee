@@ -229,7 +229,7 @@
         buttonHolder = jQuery '<span></span>'
         buttonHolder.hallobutton
           label: 'Condici\u00F3n Texto'
-          icon: 'icon-text-height'
+          icon: 'condicion-texto-button'
           editable: @options.editable
           command: null
           queryState: false

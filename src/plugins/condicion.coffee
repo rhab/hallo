@@ -343,7 +343,7 @@
         buttonHolder = jQuery '<span></span>'
         buttonHolder.hallobutton
           label: 'Condici\u00F3n'
-          icon: 'icon-plus-sign'
+          icon: 'condicion-button'
           editable: @options.editable
           command: null
           queryState: false
