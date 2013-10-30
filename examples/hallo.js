@@ -1523,7 +1523,7 @@
           button.on("click", function(event) {
             var selectionParent;
             if (!cargadosCombos) {
-              jQuery('.diasel').find('option').clone().appendTo('#filterDia');
+              jQuery('.diasel2').find('option').clone().appendTo('#filterDia');
               jQuery('.periodosIndices').find('option').clone().appendTo('#filterPerDia');
               jQuery('#filterPerDia').val('ACT');
               cargadosCombos = true;

@@ -117,7 +117,7 @@
         button.on "click", (event) ->
           # we need to save the current selection because we will lose focus
           if not cargadosCombos
-              jQuery('.diasel').find('option').clone().appendTo('#filterDia');
+              jQuery('.diasel2').find('option').clone().appendTo('#filterDia');
               jQuery('.periodosIndices').find('option').clone().appendTo('#filterPerDia')
               jQuery('#filterPerDia').val('ACT')
               cargadosCombos = true
