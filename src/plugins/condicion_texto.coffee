@@ -172,6 +172,20 @@
         op1f = generarOperando '1'
         op2f = generarOperando '2'
         
+        #parte1 es el primer operando del operador lógico, parte2 es el...
+        parte1 = false
+        parte2 = false
+        if codCapsula1 isnt ""
+            parte1 = true
+        if op2f.tipo is "capsula" and codCapsula2 isnt ""
+            parte2 = true
+        if op2f.tipo is "constante" and constante2 isnt ""
+            parte2 = true
+        if parte1 and parte2
+            resaltado = "conTResaltadoEditor"
+        else
+            resaltado = "conTOscuroResaltadoEditor"   
+            
         #widget.lastSelection.collapse(true);
         if existe
             #actualizo el los atributos del link actual
@@ -191,13 +205,13 @@
             
             jQuery(nodoLink).attr('data-tval', tval)
             jQuery(nodoLink).attr('data-fval', fval)
-            jQuery(nodoLink).attr('class', "conTResaltadoEditor resaltadoEditor")
+            jQuery(nodoLink).attr('class',  resaltado + " resaltadoEditor")
             jQuery(nodoLink).attr('title', "SI TEXTO #{op1f.txt} #{comparacion} #{op2f.txt} ENTONCES #{tval} SINO #{fval}")
             jQuery(nodoLink).attr('data-dsl', "ift(#{op1f.dsl} #{comparacion} #{op2f.dsl}, '#{tval}', '#{fval}')")
         else
             #creo un link con los datos de la capsula
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue
-            linkNode = jQuery("<a class=\"conTResaltadoEditor resaltadoEditor\" 
+            linkNode = jQuery("<a class=\"" + resaltado + " resaltadoEditor\" 
             title=\"SI TEXTO #{op1f.txt} #{comparacion} #{op2f.txt} ENTONCES #{tval} SINO #{fval}\" 
             data-dsl=\"ift(#{op1f.dsl} #{comparacion} #{op2f.dsl}, '#{tval}', '#{fval}')\" 
             data-cap=\"#{codCapsula1}\" 

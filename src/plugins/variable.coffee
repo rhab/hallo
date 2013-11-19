@@ -61,19 +61,24 @@
         widget.options.editable.restoreSelection(widget.lastSelection)
         codVariable = (jQuery "#filterVariables option:selected").val()
         
+        if codVariable is ""
+            resaltado = "variableOscuroResaltadoEditor"
+        else
+            resaltado = "variableResaltadoEditor"
+        
         #widget.lastSelection.collapse(true);
         if existe
             #actualizo el los atributos del link actual
             #document.execCommand "unlink", null, ""
             nodoLink = widget.lastSelection.startContainer.parentNode
             jQuery(nodoLink).attr('data-codVariable', codVariable)
-            jQuery(nodoLink).attr('class', "variableResaltadoEditor resaltadoEditor")
+            jQuery(nodoLink).attr('class', resaltado + " resaltadoEditor")
             jQuery(nodoLink).attr('title', "Variable: #{codVariable}")
             jQuery(nodoLink).attr('data-dsl', "'#{codVariable}'")
         else
             #creo un link con los datos de la capsula
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue
-            linkNode = jQuery("<a class=\"variableResaltadoEditor resaltadoEditor\" 
+            linkNode = jQuery("<a class=\"" + resaltado + " resaltadoEditor\" 
             title=\"Variable: #{codVariable}\" 
             data-dsl=\"'#{codVariable}'\" 
             data-codVariable=\"#{codVariable}\" 

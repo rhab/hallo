@@ -983,7 +983,7 @@
           return false;
         };
         dialogSubmitCb = function(event) {
-          var codCapsula1, codCapsula2, codCapsula3, codCapsula4, codPeriodo1, codPeriodo2, codPeriodo3, codPeriodo4, comparacion, constante1, constante2, constante3, constante4, fval, link, linkNode, nodoLink, op1f, op2f, op3f, op4f, operacion, operacion2, tval;
+          var codCapsula1, codCapsula2, codCapsula3, codCapsula4, codPeriodo1, codPeriodo2, codPeriodo3, codPeriodo4, comparacion, constante1, constante2, constante3, constante4, fval, link, linkNode, nodoLink, op1f, op2f, op3f, op4f, operacion, operacion2, parte1, parte2, resaltado, tval;
           event.preventDefault();
           link = "javascript:void(0)";
           dialog.dialog('close');
@@ -1009,6 +1009,25 @@
           op2f = generarOperando('2');
           op3f = generarOperando('3');
           op4f = generarOperando('4');
+          parte1 = false;
+          parte2 = false;
+          if (op1f.tipo === "capsula" && codCapsula1 !== "") {
+            parte1 = true;
+          }
+          if (op1f.tipo === "constante" && constante1 !== "") {
+            parte1 = true;
+          }
+          if (op3f.tipo === "capsula" && codCapsula3 !== "") {
+            parte2 = true;
+          }
+          if (op3f.tipo === "constante" && constante3 !== "") {
+            parte2 = true;
+          }
+          if (parte1 && parte2) {
+            resaltado = "conResaltadoEditor";
+          } else {
+            resaltado = "conOscuroResaltadoEditor";
+          }
           if (existe) {
             nodoLink = widget.lastSelection.startContainer.parentNode;
             jQuery(nodoLink).attr('data-cap', codCapsula1);
@@ -1032,12 +1051,12 @@
             jQuery(nodoLink).attr('data-tipoOperando4', op4f.tipo);
             jQuery(nodoLink).attr('data-tval', tval);
             jQuery(nodoLink).attr('data-fval', fval);
-            jQuery(nodoLink).attr('class', "conResaltadoEditor resaltadoEditor");
+            jQuery(nodoLink).attr('class', resaltado + " resaltadoEditor");
             jQuery(nodoLink).attr('title', "SI " + op1f.txt + " " + operacion + " " + op2f.txt + " " + comparacion + " " + op3f.txt + " " + operacion2 + " " + op4f.txt + " ENTONCES " + tval + " SINO " + fval);
             jQuery(nodoLink).attr('data-dsl', "if(" + op1f.dsl + " " + operacion + " " + op2f.dsl + " " + comparacion + " " + op3f.dsl + " " + operacion2 + " " + op4f.dsl + ",                 '" + tval + "', '" + fval + "')");
           } else {
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue;
-            linkNode = jQuery("<a class=\"conResaltadoEditor resaltadoEditor\"             title=\"SI " + op1f.txt + " " + operacion + " " + op2f.txt + " " + comparacion + " " + op3f.txt + " " + operacion2 + " " + op4f.txt + " ENTONCES " + tval + " SINO " + fval + "\"             data-dsl=\"if(" + op1f.dsl + " " + operacion + " " + op2f.dsl + " " + comparacion + " " + op3f.dsl + " " + operacion2 + " " + op4f.dsl + ",                 '" + tval + "', '" + fval + "')\"             data-cap=\"" + codCapsula1 + "\"             data-per=\"" + codPeriodo1 + "\"             data-ope=\"" + operacion + "\"             data-cap2=\"" + codCapsula2 + "\"             data-per2=\"" + codPeriodo2 + "\"             data-comp=\"" + comparacion + "\"                         data-cap3=\"" + codCapsula3 + "\"             data-per3=\"" + codPeriodo3 + "\"             data-ope2=\"" + operacion2 + "\"             data-cap4=\"" + codCapsula4 + "\"             data-per4=\"" + codPeriodo4 + "\"                         data-constante1=\"" + constante1 + "\"             data-constante2=\"" + constante2 + "\"             data-constante3=\"" + constante3 + "\"             data-constante4=\"" + constante4 + "\"                         data-tipoOperando1=\"" + op1f.tipo + "\"            data-tipoOperando2=\"" + op2f.tipo + "\"            data-tipoOperando3=\"" + op3f.tipo + "\"            data-tipoOperando4=\"" + op4f.tipo + "\"                        data-tval=\"" + tval + "\"             data-fval=\"" + fval + "\"             href='" + link + "'>" + texto + "</a>")[0];
+            linkNode = jQuery("<a class=\"" + resaltado + (" resaltadoEditor\"             title=\"SI " + op1f.txt + " " + operacion + " " + op2f.txt + " " + comparacion + " " + op3f.txt + " " + operacion2 + " " + op4f.txt + " ENTONCES " + tval + " SINO " + fval + "\"             data-dsl=\"if(" + op1f.dsl + " " + operacion + " " + op2f.dsl + " " + comparacion + " " + op3f.dsl + " " + operacion2 + " " + op4f.dsl + ",                 '" + tval + "', '" + fval + "')\"             data-cap=\"" + codCapsula1 + "\"             data-per=\"" + codPeriodo1 + "\"             data-ope=\"" + operacion + "\"             data-cap2=\"" + codCapsula2 + "\"             data-per2=\"" + codPeriodo2 + "\"             data-comp=\"" + comparacion + "\"                         data-cap3=\"" + codCapsula3 + "\"             data-per3=\"" + codPeriodo3 + "\"             data-ope2=\"" + operacion2 + "\"             data-cap4=\"" + codCapsula4 + "\"             data-per4=\"" + codPeriodo4 + "\"                         data-constante1=\"" + constante1 + "\"             data-constante2=\"" + constante2 + "\"             data-constante3=\"" + constante3 + "\"             data-constante4=\"" + constante4 + "\"                         data-tipoOperando1=\"" + op1f.tipo + "\"            data-tipoOperando2=\"" + op2f.tipo + "\"            data-tipoOperando3=\"" + op3f.tipo + "\"            data-tipoOperando4=\"" + op4f.tipo + "\"                        data-tval=\"" + tval + "\"             data-fval=\"" + fval + "\"             href='" + link + "'>" + texto + "</a>"))[0];
             widget.lastSelection.insertNode(linkNode);
           }
           widget.options.editable.element.trigger('change');
@@ -1274,7 +1293,7 @@
           return false;
         };
         dialogSubmitCb = function(event) {
-          var codCapsula1, codCapsula2, codPeriodo1, codPeriodo2, comparacion, constante1, constante2, fval, link, linkNode, nodoLink, op1f, op2f, tval;
+          var codCapsula1, codCapsula2, codPeriodo1, codPeriodo2, comparacion, constante1, constante2, fval, link, linkNode, nodoLink, op1f, op2f, parte1, parte2, resaltado, tval;
           event.preventDefault();
           link = "javascript:void(0)";
           dialog.dialog('close');
@@ -1290,6 +1309,22 @@
           fval = (jQuery("#fvalCT")).val();
           op1f = generarOperando('1');
           op2f = generarOperando('2');
+          parte1 = false;
+          parte2 = false;
+          if (codCapsula1 !== "") {
+            parte1 = true;
+          }
+          if (op2f.tipo === "capsula" && codCapsula2 !== "") {
+            parte2 = true;
+          }
+          if (op2f.tipo === "constante" && constante2 !== "") {
+            parte2 = true;
+          }
+          if (parte1 && parte2) {
+            resaltado = "conTResaltadoEditor";
+          } else {
+            resaltado = "conTOscuroResaltadoEditor";
+          }
           if (existe) {
             nodoLink = widget.lastSelection.startContainer.parentNode;
             jQuery(nodoLink).attr('data-cap', codCapsula1);
@@ -1303,12 +1338,12 @@
             jQuery(nodoLink).attr('data-tipoOperando2', op2f.tipo);
             jQuery(nodoLink).attr('data-tval', tval);
             jQuery(nodoLink).attr('data-fval', fval);
-            jQuery(nodoLink).attr('class', "conTResaltadoEditor resaltadoEditor");
+            jQuery(nodoLink).attr('class', resaltado + " resaltadoEditor");
             jQuery(nodoLink).attr('title', "SI TEXTO " + op1f.txt + " " + comparacion + " " + op2f.txt + " ENTONCES " + tval + " SINO " + fval);
             jQuery(nodoLink).attr('data-dsl', "ift(" + op1f.dsl + " " + comparacion + " " + op2f.dsl + ", '" + tval + "', '" + fval + "')");
           } else {
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue;
-            linkNode = jQuery("<a class=\"conTResaltadoEditor resaltadoEditor\"             title=\"SI TEXTO " + op1f.txt + " " + comparacion + " " + op2f.txt + " ENTONCES " + tval + " SINO " + fval + "\"             data-dsl=\"ift(" + op1f.dsl + " " + comparacion + " " + op2f.dsl + ", '" + tval + "', '" + fval + "')\"             data-cap=\"" + codCapsula1 + "\"             data-per=\"" + codPeriodo1 + "\"             data-cap2=\"" + codCapsula2 + "\"             data-per2=\"" + codPeriodo2 + "\"             data-comp=\"" + comparacion + "\"                         data-constante1=\"" + constante1 + "\"             data-constante2=\"" + constante2 + "\"                         data-tipoOperando1=\"" + op1f.tipo + "\"            data-tipoOperando2=\"" + op2f.tipo + "\"                        data-tval=\"" + tval + "\"             data-fval=\"" + fval + "\"             href='" + link + "'>" + texto + "</a>")[0];
+            linkNode = jQuery("<a class=\"" + resaltado + (" resaltadoEditor\"             title=\"SI TEXTO " + op1f.txt + " " + comparacion + " " + op2f.txt + " ENTONCES " + tval + " SINO " + fval + "\"             data-dsl=\"ift(" + op1f.dsl + " " + comparacion + " " + op2f.dsl + ", '" + tval + "', '" + fval + "')\"             data-cap=\"" + codCapsula1 + "\"             data-per=\"" + codPeriodo1 + "\"             data-cap2=\"" + codCapsula2 + "\"             data-per2=\"" + codPeriodo2 + "\"             data-comp=\"" + comparacion + "\"                         data-constante1=\"" + constante1 + "\"             data-constante2=\"" + constante2 + "\"                         data-tipoOperando1=\"" + op1f.tipo + "\"            data-tipoOperando2=\"" + op2f.tipo + "\"                        data-tval=\"" + tval + "\"             data-fval=\"" + fval + "\"             href='" + link + "'>" + texto + "</a>"))[0];
             widget.lastSelection.insertNode(linkNode);
           }
           widget.options.editable.element.trigger('change');
@@ -3005,21 +3040,26 @@
           return false;
         };
         dialogSubmitCb = function(event) {
-          var codVariable, link, linkNode, nodoLink;
+          var codVariable, link, linkNode, nodoLink, resaltado;
           event.preventDefault();
           link = "javascript:void(0)";
           dialog.dialog('close');
           widget.options.editable.restoreSelection(widget.lastSelection);
           codVariable = (jQuery("#filterVariables option:selected")).val();
+          if (codVariable === "") {
+            resaltado = "variableOscuroResaltadoEditor";
+          } else {
+            resaltado = "variableResaltadoEditor";
+          }
           if (existe) {
             nodoLink = widget.lastSelection.startContainer.parentNode;
             jQuery(nodoLink).attr('data-codVariable', codVariable);
-            jQuery(nodoLink).attr('class', "variableResaltadoEditor resaltadoEditor");
+            jQuery(nodoLink).attr('class', resaltado + " resaltadoEditor");
             jQuery(nodoLink).attr('title', "Variable: " + codVariable);
             jQuery(nodoLink).attr('data-dsl', "'" + codVariable + "'");
           } else {
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue;
-            linkNode = jQuery("<a class=\"variableResaltadoEditor resaltadoEditor\"             title=\"Variable: " + codVariable + "\"             data-dsl=\"'" + codVariable + "'\"             data-codVariable=\"" + codVariable + "\"             href='" + link + "'>" + texto + "</a>")[0];
+            linkNode = jQuery("<a class=\"" + resaltado + (" resaltadoEditor\"             title=\"Variable: " + codVariable + "\"             data-dsl=\"'" + codVariable + "'\"             data-codVariable=\"" + codVariable + "\"             href='" + link + "'>" + texto + "</a>"))[0];
             widget.lastSelection.insertNode(linkNode);
           }
           widget.options.editable.element.trigger('change');

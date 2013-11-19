@@ -262,6 +262,24 @@
         op3f = generarOperando '3'
         op4f = generarOperando '4'
         
+        #parte1 es el primer operando del operador lógico, parte2 es el...
+        parte1 = false
+        parte2 = false
+        if op1f.tipo is "capsula" and codCapsula1 isnt ""
+            parte1 = true
+        if op1f.tipo is "constante" and constante1 isnt ""
+            parte1 = true
+            
+        if op3f.tipo is "capsula" and codCapsula3 isnt ""
+            parte2 = true
+        if op3f.tipo is "constante" and constante3 isnt ""
+            parte2 = true
+        
+        if parte1 and parte2
+            resaltado = "conResaltadoEditor"
+        else
+            resaltado = "conOscuroResaltadoEditor"
+        
         #widget.lastSelection.collapse(true);
         if existe
             #actualizo el los atributos del link actual
@@ -292,14 +310,14 @@
             
             jQuery(nodoLink).attr('data-tval', tval)
             jQuery(nodoLink).attr('data-fval', fval)
-            jQuery(nodoLink).attr('class', "conResaltadoEditor resaltadoEditor")
+            jQuery(nodoLink).attr('class', resaltado + " resaltadoEditor")
             jQuery(nodoLink).attr('title', "SI #{op1f.txt} #{operacion} #{op2f.txt} #{comparacion} #{op3f.txt} #{operacion2} #{op4f.txt} ENTONCES #{tval} SINO #{fval}")
             jQuery(nodoLink).attr('data-dsl', "if(#{op1f.dsl} #{operacion} #{op2f.dsl} #{comparacion} #{op3f.dsl} #{operacion2} #{op4f.dsl}, 
                 '#{tval}', '#{fval}')")
         else
             #creo un link con los datos de la capsula
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue
-            linkNode = jQuery("<a class=\"conResaltadoEditor resaltadoEditor\" 
+            linkNode = jQuery("<a class=\"" + resaltado + " resaltadoEditor\" 
             title=\"SI #{op1f.txt} #{operacion} #{op2f.txt} #{comparacion} #{op3f.txt} #{operacion2} #{op4f.txt} ENTONCES #{tval} SINO #{fval}\" 
             data-dsl=\"if(#{op1f.dsl} #{operacion} #{op2f.dsl} #{comparacion} #{op3f.dsl} #{operacion2} #{op4f.dsl}, 
                 '#{tval}', '#{fval}')\" 
