@@ -94,7 +94,7 @@
         buttonHolder = jQuery '<span></span>'
         buttonHolder.hallobutton
           label: 'Periodo'
-          icon: 'condicion-texto-button'
+          icon: 'periodo-button'
           editable: @options.editable
           command: null
           queryState: false
