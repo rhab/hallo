@@ -20,6 +20,17 @@
         stack: true
         draggable: true
         dialogClass: 'condicion-dialog'
+        buttons: 
+            Agregar:
+                id: 'agregar-button-cond',
+                text: 'Agregar',
+                click: () ->
+                    
+            Borrar:
+                text: 'Borrar',
+                id: 'borrar-button-cond',
+                click: () ->
+                    
       buttonCssClass: null 
 
     populateToolbar: (toolbar) ->
@@ -170,9 +181,6 @@
           <div id='dialogTextoId' class='contenidoEditorDialog'>
           </div>
           </fieldset>
-          
-          <input type=\"submit\" style=\"margin:6px;\" id=\"dellinkButton\" value=\"Borrar\"/>
-          <input type=\"submit\" style=\"margin:6px;\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
         </form>
         </div>"
       urlInput = jQuery('input[name=url]', dialog)
@@ -351,10 +359,6 @@
         widget.options.editable.element.trigger('change')
         return false
 
-      dialog.find("#addlinkButton").click dialogSubmitCb
-      dialog.find("#dellinkButton").click dialogSubmitBorrar
-      
-
       buttonset = jQuery "<span class=\"#{widget.widgetName}\"></span>"
       buttonize = (type) =>
         id = "#{@options.uuid}-#{type}"
@@ -372,6 +376,8 @@
         button.on "click", (event) ->
           # we need to save the current selection because we will lose focus
           if not cargadosCombos
+              jQuery("#borrar-button-cond").click dialogSubmitBorrar
+              jQuery("#agregar-button-cond").click dialogSubmitCb
               jQuery('.capselNumericas').find('option').clone().appendTo('#filterCapCon1');
               jQuery('.capselNumericas').find('option').clone().appendTo('#filterCapCon2');
               jQuery('.capselNumericas').find('option').clone().appendTo('#filterCapCon3');

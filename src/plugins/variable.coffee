@@ -19,6 +19,17 @@
         resizable: false
         draggable: true
         dialogClass: 'variable-dialog'
+        buttons: 
+            Agregar:
+                id: 'agregar-button-vari',
+                text: 'Agregar',
+                click: () ->
+                    
+            Borrar:
+                text: 'Borrar',
+                id: 'borrar-button-vari',
+                click: () ->
+                    
       buttonCssClass: null 
 
     populateToolbar: (toolbar) ->
@@ -38,8 +49,6 @@
           <select id=\"filterVariables\" class=\"filterChooser\" title=\"Variables\">
               <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione una variable --</option>
           </select><br />
-          <input type=\"submit\" id=\"dellinkButton\" value=\"Borrar\"/>
-          <input type=\"submit\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
         </form></div>"
       urlInput = jQuery('input[name=url]', dialog)
                 
@@ -87,9 +96,6 @@
         widget.options.editable.element.trigger('change')
         return false
 
-      dialog.find("#addlinkButton").click dialogSubmitCb
-      dialog.find("#dellinkButton").click dialogSubmitBorrar
-      
       buttonset = jQuery "<span class=\"#{widget.widgetName}\"></span>"
       buttonize = (type) =>
         id = "#{@options.uuid}-#{type}"
@@ -107,8 +113,9 @@
         button.on "click", (event) ->
           # we need to save the current selection because we will lose focus
           if not cargadosCombos
+              jQuery("#borrar-button-vari").click dialogSubmitBorrar
+              jQuery("#agregar-button-vari").click dialogSubmitCb
               jQuery('.variablesEditor').find('option').clone().appendTo('#filterVariables');
-                            
               cargadosCombos = true
               
           widget.lastSelection = widget.options.editable.getSelection()

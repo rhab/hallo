@@ -19,6 +19,17 @@
         resizable: false
         draggable: true
         dialogClass: 'periodo-dialog'
+        buttons: 
+            Agregar:
+                id: 'agregar-button-p',
+                text: 'Agregar',
+                click: () ->
+                    
+            Borrar:
+                text: 'Borrar',
+                id: 'borrar-button-p',
+                click: () ->
+                    
       buttonCssClass: null 
 
     populateToolbar: (toolbar) ->
@@ -37,8 +48,6 @@
             
           <select id=\"filterPerPer\" class=\"filterChooser\" title=\"Periodos\">
           </select><br />
-          <input type=\"submit\" id=\"dellinkButton\" value=\"Borrar\"/>
-          <input type=\"submit\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
         </form></div>"
       urlInput = jQuery('input[name=url]', dialog)
 
@@ -84,10 +93,6 @@
         widget.options.editable.element.trigger('change')
         return false
 
-      dialog.find("#addlinkButton").click dialogSubmitCb
-      dialog.find("#dellinkButton").click dialogSubmitBorrar
-      
-
       buttonset = jQuery "<span class=\"#{widget.widgetName}\"></span>"
       buttonize = (type) =>
         id = "#{@options.uuid}-#{type}"
@@ -105,6 +110,8 @@
         button.on "click", (event) ->
           # we need to save the current selection because we will lose focus
           if not cargadosCombos
+              jQuery("#borrar-button-p").click dialogSubmitBorrar
+              jQuery("#agregar-button-p").click dialogSubmitCb
               jQuery('.periodosIndices').find('option').clone().appendTo('#filterPerPer')
               jQuery('#filterPerPer').val('ACT')
               cargadosCombos = true

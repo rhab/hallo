@@ -19,6 +19,17 @@
         resizable: false
         draggable: true
         dialogClass: 'condicionT-dialog'
+        buttons: 
+            Agregar:
+                id: 'agregar-button-ct',
+                text: 'Agregar',
+                click: () ->
+                    
+            Borrar:
+                text: 'Borrar',
+                id: 'borrar-button-ct',
+                click: () ->
+                    
       buttonCssClass: null 
 
     populateToolbar: (toolbar) ->
@@ -91,9 +102,6 @@
           	</TR>
           </TABLE>
           </fieldset>
-          
-          <input type=\"submit\" style=\"margin:6px;\" id=\"dellinkButton\" value=\"Borrar\"/>
-          <input type=\"submit\" style=\"margin:6px;\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
         </form></div>"
       urlInput = jQuery('input[name=url]', dialog)
 
@@ -254,6 +262,8 @@
         button.on "click", (event) ->
           # we need to save the current selection because we will lose focus
           if not cargadosCombos
+              jQuery("#borrar-button-ct").click dialogSubmitBorrar
+              jQuery("#agregar-button-ct").click dialogSubmitCb
               jQuery('.capselTexto').find('option').clone().appendTo('#filterCapConT1');
               jQuery('.capselTexto').find('option').clone().appendTo('#filterCapConT2');
               

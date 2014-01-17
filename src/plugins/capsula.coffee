@@ -19,6 +19,17 @@
         resizable: false
         draggable: true
         dialogClass: 'capsula-dialog'
+        buttons: 
+            Agregar:
+                id: 'agregar-button-caps',
+                text: 'Agregar',
+                click: () ->
+                    
+            Borrar:
+                text: 'Borrar',
+                id: 'borrar-button-caps',
+                click: () ->
+                    
       buttonCssClass: null 
 
     populateToolbar: (toolbar) ->
@@ -41,8 +52,6 @@
           
           <select id=\"filterPer\" class=\"filterChooser\" style=\"width:15%;\" title=\"Periodos\">
           </select><br />
-          <input type=\"submit\" id=\"dellinkButton\" value=\"Borrar\"/>
-          <input type=\"submit\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
         </form></div>"
       urlInput = jQuery('input[name=url]', dialog)
 
@@ -82,12 +91,12 @@
             jQuery(nodoLink).attr('data-cap', codCapsula)
             jQuery(nodoLink).attr('data-per', codPeriodo)
             jQuery(nodoLink).attr('class', resaltado + " resaltadoEditor")
-            jQuery(nodoLink).attr('title', "C\u00E1psula #{codCapsula} ## Periodo #{codPeriodo}")
+            jQuery(nodoLink).attr('title', "C\u00E1psula #{codCapsula} del Periodo #{codPeriodo}")
             jQuery(nodoLink).attr('data-dsl', "capf(\'#{codCapsula}\',\'#{codPeriodo}\')")
         else
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue
             linkNode = jQuery("<a class=\"" + resaltado + " resaltadoEditor\" 
-            title=\"C&aacute;psula #{codCapsula} ## Periodo #{codPeriodo}\" 
+            title=\"C&aacute;psula #{codCapsula} del Periodo #{codPeriodo}\" 
             data-dsl=\"capf('#{codCapsula}','#{codPeriodo}')\" 
             data-cap=\"#{codCapsula}\" 
             data-per=\"#{codPeriodo}\" 
@@ -95,10 +104,6 @@
             widget.lastSelection.insertNode(linkNode);
         widget.options.editable.element.trigger('change')
         return false
-
-      dialog.find("#addlinkButton").click dialogSubmitCb
-      dialog.find("#dellinkButton").click dialogSubmitBorrar
-      
 
       buttonset = jQuery "<span class=\"#{widget.widgetName}\"></span>"
       buttonize = (type) =>
@@ -117,6 +122,8 @@
         button.on "click", (event) ->
           # we need to save the current selection because we will lose focus
           if not cargadosCombos
+              jQuery("#borrar-button-caps").click dialogSubmitBorrar
+              jQuery("#agregar-button-caps").click dialogSubmitCb
               jQuery('.capsel').find('option').clone().appendTo('#filterCap')
               jQuery('.periodosIndices').find('option').clone().appendTo('#filterPer')
               jQuery('#filterPer').val('ACT')

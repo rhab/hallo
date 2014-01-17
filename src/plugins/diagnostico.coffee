@@ -11,7 +11,6 @@
       dialogOpts:
         autoOpen: false
         width: 540
-        height: 200
         title: "Ingresar Diagn\u00F3stico"
         buttonTitle: "Aceptar"
         buttonUpdateTitle: "Aceptar"
@@ -19,6 +18,17 @@
         resizable: false
         draggable: true
         dialogClass: 'diagnostico-dialog'
+        buttons: 
+            Agregar:
+                id: 'agregar-button',
+                text: 'Agregar',
+                click: () ->
+                    
+            Borrar:
+                text: 'Borrar',
+                id: 'borrar-button',
+                click: () ->
+                    
       buttonCssClass: null 
 
     populateToolbar: (toolbar) ->
@@ -30,26 +40,51 @@
       dialogId = "#{@options.uuid}-dialog"
       butTitle = @options.dialogOpts.buttonTitle
       butUpdateTitle = @options.dialogOpts.buttonUpdateTitle
-      dialog = jQuery "<div id=\"#{dialogId}\" style=\"cursor:default;\">
-        <form action=\"#\" method=\"post\" class=\"linkForm\">
-          <input class=\"url\" style=\"display:none\" type=\"text\" name=\"url\"
-            value=\"#{@options.defaultUrl}\" />
+      dialog = jQuery "<div id='#{dialogId}' style='cursor:default;'>
+        <form action='#' method='post' class='linkForm'>
+          <input class='url' style='display:none' type='text' name='url'
+            value='#{@options.defaultUrl}' />
             
-          <select id=\"filterDia\" class=\"filterChooser\" style=\"width:45%;\" title=\"Diagn\u00F3sticos\">
-              <option value=\"\" data-filter-type=\"\" selected=\"selected\">-- Seleccione un Diagn\u00F3stico --</option>
-          </select>
-          
-          <select id=\"filterPerDia\" class=\"filterChooser\" style=\"width:20%;\" title=\"Periodos\">
-          </select><br />
-          <input type=\"submit\" id=\"dellinkButton\" value=\"Borrar\"/>
-          <input type=\"submit\" id=\"addlinkButton\" value=\"#{butTitle}\"/>
+          <TABLE>
+          	<TR>
+	    				<TD style='padding: 2px;width:48%;'>
+			          <fieldset style='border:2px solid black;'>
+			          <legend>C\u00E1psula</legend>
+			          
+				          <select id='filterDia' class='filterChooser' style='width:60%;' title='Diagn\u00F3sticos'>
+				              <option value='' data-filter-type='' selected='selected'>-- Seleccionar --</option>
+				          </select>
+                  
+                  <select id='filterPerDia' class='filterChooser' style='width:35%;' title='Periodos'></select>
+			          </fieldset>
+          		</TD>
+          		<TD style='padding: 2px;width:48%;'>
+			          <fieldset style='border:2px solid black;'>
+						    <legend>Campo BD</legend>
+                  
+			          <select id='filterCampoDia' class='filterChooser' style='width:80%;' title='Campo'>
+			              <option value='CALIFICACION' selected='selected'>CALIFICACI\u00D3N</option>
+			              <option value='COMENTARIO1'>COMENTARIO1</option>
+			              <option value='COMENTARIO2'>COMENTARIO2</option>
+			              <option value='COMENTARIO3'>COMENTARIO3</option>
+			              <option value='COMENTARIO4'>COMENTARIO4</option>
+			              <option value='COMENTARIO5'>COMENTARIO5</option>
+			          </select>
+			          </fieldset>
+			        </TD>
+            </TR>
+            <TR>
+                <TD style='padding: 2px;width:48%;'>
+			          <fieldset style='border:2px solid black;'>
+			          <legend>Opciones</legend>
+			              <input type='checkbox' name='perfilgenerico' id='filterPerfilDia' value='S'>Perfil Gen\u00E9rico<br>
+			          </fieldset>
+			        </TD>
+            </TR>
+          </TABLE>
+
         </form></div>"
       urlInput = jQuery('input[name=url]', dialog)
-
-      isEmptyLink = (link) ->
-        return true if (new RegExp(/^\s*$/)).test link
-        return true if link is widget.options.defaultUrl
-        false
 
       dialogSubmitBorrar = (event) ->
         event.preventDefault()
@@ -69,6 +104,11 @@
         widget.options.editable.restoreSelection(widget.lastSelection)
         codCapsula = (jQuery "#filterDia option:selected").val()
         codPeriodo = (jQuery "#filterPerDia option:selected").val()
+        campo = (jQuery "#filterCampoDia option:selected").val()
+        if (jQuery "#filterPerfilDia").prop('checked')
+            perfilGenerico = 'S'
+        else
+        	  perfilGenerico = 'N'
         
         if codCapsula is ""
             resaltado = "diaOscuroResaltadoEditor"
@@ -81,24 +121,26 @@
             nodoLink = widget.lastSelection.startContainer.parentNode
             jQuery(nodoLink).attr('data-cap', codCapsula)
             jQuery(nodoLink).attr('data-per', codPeriodo)
+            jQuery(nodoLink).attr('data-campo', campo)
+            jQuery(nodoLink).attr('data-perfilGenerico', perfilGenerico)
             jQuery(nodoLink).attr('class', resaltado + " resaltadoEditor")
-            jQuery(nodoLink).attr('title', "Diagn\u00F3stico #{codCapsula} ## Periodo #{codPeriodo}")
-            jQuery(nodoLink).attr('data-dsl', "dia(\'#{codCapsula}\',\'#{codPeriodo}\')")
+            jQuery(nodoLink).attr('title', "Diagn\u00F3stico #{codCapsula} del Periodo #{codPeriodo}. Campo: #{campo}. Perfil Gen\u00E9rico: #{perfilGenerico}.")
+            jQuery(nodoLink).attr('data-dsl', "dia(\'#{codCapsula}\',\'#{codPeriodo}\',\'#{campo}\',\'#{perfilGenerico}\')")
         else
             texto = widget.lastSelection.extractContents().childNodes[0].nodeValue
             linkNode = jQuery("<a class=\"" + resaltado + " resaltadoEditor\" 
-            title=\"Diagn\u00F3stico #{codCapsula} ## Periodo #{codPeriodo}\" 
-            data-dsl=\"dia('#{codCapsula}','#{codPeriodo}')\" 
+            title=\"Diagn\u00F3stico #{codCapsula} del Periodo #{codPeriodo}. Campo: #{campo}. Perfil Gen\u00E9rico: #{perfilGenerico}.\" 
+            data-dsl=\"dia('#{codCapsula}','#{codPeriodo}','#{campo}','#{perfilGenerico}')\" 
             data-cap=\"#{codCapsula}\" 
             data-per=\"#{codPeriodo}\" 
+            data-campo=\"#{campo}\" 
+            data-perfilGenerico=\"#{perfilGenerico}\" 
             href='#{link}'>#{texto}</a>")[0];
             widget.lastSelection.insertNode(linkNode);
         widget.options.editable.element.trigger('change')
         return false
 
-      dialog.find("#addlinkButton").click dialogSubmitCb
-      dialog.find("#dellinkButton").click dialogSubmitBorrar
-      
+      #dialog.find("#addlinkButton").click dialogSubmitCb
 
       buttonset = jQuery "<span class=\"#{widget.widgetName}\"></span>"
       buttonize = (type) =>
@@ -117,6 +159,8 @@
         button.on "click", (event) ->
           # we need to save the current selection because we will lose focus
           if not cargadosCombos
+              jQuery("#borrar-button").click dialogSubmitBorrar
+              jQuery("#agregar-button").click dialogSubmitCb
               jQuery('.diasel2').find('option').clone().appendTo('#filterDia');
               jQuery('.periodosIndices').find('option').clone().appendTo('#filterPerDia')
               jQuery('#filterPerDia').val('ACT')
@@ -128,11 +172,18 @@
             urlInput.val(widget.options.defaultUrl)
             jQuery("#filterDia").val ""
             jQuery("#filterPerDia").val ""
+            jQuery("#filterCampoDia").val "CALIFICACION"
+            jQuery("#filterPerfilDia").attr('checked', false);
             existe = false
           else
             urlInput.val(jQuery(selectionParent).attr('href'))
             jQuery("#filterDia").val jQuery(selectionParent).attr('data-cap')
             jQuery("#filterPerDia").val jQuery(selectionParent).attr('data-per')
+            jQuery("#filterCampoDia").val jQuery(selectionParent).attr('data-campo')
+            if jQuery(selectionParent).attr('data-perfilGenerico') is 'S'
+                jQuery("#filterPerfilDia").attr('checked', true);
+            else
+                jQuery("#filterPerfilDia").attr('checked', false);
             texto = jQuery(selectionParent).text()
             existe = true
 
